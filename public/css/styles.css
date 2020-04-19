@@ -1,0 +1,47 @@
+body {
+    background-color: lightgray;
+}
+
+@font-face {
+    font-family: 'long_shot';
+    src: url('../fonts/long_shot.woff2') format('woff2'),
+    url('../fonts/long_shot.woff2') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.MuiTypography-h4 {
+    font-family: 'long_shot', serif;
+}
+
+.news_load_more span{
+    transition: all .1s linear;
+}
+
+.news_load_more:hover span{
+    transform: rotate(180deg);
+}
+
+.news-container img {
+    transition: filter .4s linear;
+}
+
+.news-container img:hover {
+    filter: blur(4px) grayscale(100%);
+}
+
+.dzu-dropzone {
+    overflow: hidden;
+}
+
+.dzu-inputLabel {
+    color: rgba(243, 243, 243, 0.87);
+}
+
+.dzu-previewButton:after {
+    content:'x';
+    padding: 5px;
+    font-weight: bold;
+    width: 50px;
+    height: 50px;
+}
