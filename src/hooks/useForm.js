@@ -1,10 +1,10 @@
 import {useContext, useState} from "react";
-import ConfigContext from "../provider/ConfigContext";
+import {config} from "../../src/Config";
 import FlashBarContext from "../provider/FlashBarContext";
 import {useCookies} from "react-cookie";
+import {remoteAsync} from "../Utils/Remote";
 
 export default function useForm(resource, initialState, validation) {
-    const config = useContext(ConfigContext);
     const flashContext = useContext(FlashBarContext);
     const [cookies, ,] = useCookies();
     const [state, setState] = useState(initialState);
@@ -67,7 +67,6 @@ export default function useForm(resource, initialState, validation) {
 
         let isValid = await validate();
         if (!isValid) {
-            console.log(isValid);
             return;
         }
 
@@ -81,13 +80,9 @@ export default function useForm(resource, initialState, validation) {
 
         const options = {
             headers: headers,
-            cache: 'default',
-            mode: 'cors',
-            method: httpVerb,
-            body: JSON.stringify(state)
+            parameters: {method: httpVerb, body: JSON.stringify(state)}
         };
-        fetch(config.ws_url + '/' + resource, options)
-            .then(data => data.json())
+        remoteAsync('/' + resource, options)
             .then(response => {
                 if (response.errors.length > 0) {
                     flashContext.show(response.errors.join(' | '), 'error', 5000);

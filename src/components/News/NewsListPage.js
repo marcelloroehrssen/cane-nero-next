@@ -1,16 +1,14 @@
-import React, {useContext, useState} from 'react'
+import React, {useState} from 'react'
 import {Button} from '@material-ui/core'
 import Grid from '@material-ui/core/Grid'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import Chip from '@material-ui/core/Chip'
 import NewsCard from '../card/NewsCard'
-import Link from '../Link'
 import useTheme from '@material-ui/core/styles/useTheme'
 import Tooltip from '@material-ui/core/Tooltip'
 import IconButton from '@material-ui/core/IconButton'
 import AutorenewIcon from '@material-ui/icons/Autorenew'
-import ConfigContext from '../../provider/ConfigContext'
 import LengthCheck from '../layout/LengthCheck'
 import PropTypes from 'prop-types'
 import RoleCheck from "../RoleCheck";
@@ -31,6 +29,9 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogActions from "@material-ui/core/DialogActions";
 import NewsForm from "./NewsForm";
 import remote from "../../Utils/Remote";
+import Link from 'next/link'
+import useSWR from "swr";
+import {config} from "../../Config";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -50,12 +51,20 @@ NewsListPage.propTypes = {
 };
 
 export default function NewsListPage(props) {
-    const theme = useTheme();
-    const config = useContext(ConfigContext);
-    const [news, setNews] = useState(props.news);
+    const {data: news, mutate} = useSWR(
+        ['/news', props.filters, props.pagination],
+        (resource, filter, pagination) => remote(
+            resource,
+            {get:{filter:filters,maxresult:pagination.max_news_per_page,offset: pagination.offset}}
+        ),
+        {initialData: props.news}
+    );
+
     const [tags,] = useState(props.tags);
-    const [openSpeedDial, setOpenSpeedDial] = useState(false);
     const [pagination, setPagination] = useState(props.pagination);
+
+    const theme = useTheme();
+    const [openSpeedDial, setOpenSpeedDial] = useState(false);
     const [activeAction, setActiveAction] = useState(null);
     const [showDeleteAlert, setShowDeleteAlert] = useState(false);
     const [subject, setSubject] = useState(null);
@@ -63,38 +72,30 @@ export default function NewsListPage(props) {
     const deleteFunction = useDelete();
     const classes = useStyles();
 
+    const loadMore = async () => {
+        setPagination({
+            maxResult: pagination.maxResult + config.max_news_per_page,
+            offset: 0
+        });
+        const get = {filter:JSON.stringify(props.filters), maxresult:pagination.maxResult, offset: pagination.offset};
+        const {news: newNews} = await remote('/news', {get});
+
+        mutate(newNews);
+    };
+
+
     const onNewsCreation = (newNews, isInsert) => {
-        let newsCopy = news;
-        if (isInsert) {
-            newsCopy.unshift(newNews);
-        } else {
-            let index = -1;
-            for (const currentIndex in newsCopy) {
-                if (newsCopy[currentIndex].id === newNews.id) {
-                    index = currentIndex;
-                }
-            }
-            if (~index) {
-                newsCopy[index] = newNews;
-            } else {
-                console.log(index);
-            }
-        }
-        setNews(newsCopy);
+        mutate(news);
         setNewNewsDialogOpen(false);
     };
 
-    const deleteNews = deleteSubject => {
-        const index = news.indexOf(deleteSubject);
-        if (index > -1) {
-            news.splice(index, 1);
-            setNews(news);
-        }
-        deleteFunction(
+    const deleteNews = async deleteSubject => {
+        await deleteFunction(
             '/news', deleteSubject.id,
             'News cancellata con successo',
             'C\'è stato un errore durante la cancellazione della news'
         );
+        mutate(news);
     };
 
     const actions = [
@@ -138,21 +139,6 @@ export default function NewsListPage(props) {
         },
     ];
 
-    const loadMore = async () => {
-        setPagination({
-            maxResult: pagination.maxResult + config.max_news_per_page,
-            offset: 0
-        });
-
-        const {news: news} = await remote(
-            'news?filter=' + JSON.stringify(props.filters)
-            + '&maxresult=' + pagination.maxResult
-            + '&offset=' + pagination.offset
-        );
-
-        setNews(news);
-    };
-
     const handleOpen = () => {
         setOpenSpeedDial(true);
     };
@@ -179,24 +165,17 @@ export default function NewsListPage(props) {
                     <List component="nav">
                         <ListItem>Argomenti interessanti</ListItem>
                         {
-                            tags.map((tag) => {
-                                let href = '/news?tag=' + tag.label;
-                                let as = '/news/tag/' + tag.label;
-                                if (tag.label === props.filters.tags[0]) {
-                                    href = '/news';
-                                    as = '/news';
-                                }
-                                return (
+                            tags.map((tag) => (
                                     <ListItem key={tag.id}>
-                                        <Chip label={tag.label}
-                                              component={Link}
-                                              href={href}
-                                              as={as}
-                                              color={tag.label === props.filters.tags[0] ? 'secondary' : 'primary'}
-                                              clickable/>
+                                        <Link href={tag.slug === props.filters.tags[0] ? '/news' : '/news/tag/[tag]'}
+                                              as={tag.slug === props.filters.tags[0] ? '/news' : '/news/tag/' + tag.slug}>
+                                            <Chip label={tag.label}
+                                                  color={tag.slug === props.filters.tags[0] ? 'secondary' : 'primary'}
+                                                  clickable/>
+                                        </Link>
                                     </ListItem>
                                 )
-                            })
+                            )
                         }
                     </List>
                 </Grid>

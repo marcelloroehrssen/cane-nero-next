@@ -1,27 +1,65 @@
 import React from 'react';
-import {useRouter} from "next/router";
 import Base from "../../../src/components/layout/Base";
 import FullScreenContent from "../../../src/components/layout/FullScreenContent";
 import {Container} from "@material-ui/core";
 import NewsBody from "../../../src/components/News/NewsBody";
+import remote from "../../../src/Utils/Remote";
 
-export default function NewsDetailPage() {
+const NewsDetailPage = ({news, tags, related}) => (
+    <Base title={news.title}>
+        <FullScreenContent>
+            <div style={{
+                backgroundImage: "url(/images/home.jpg)",
+                backgroundPosition: "center center",
+                width: "100%",
+                height: 300,
+            }}/>
+        </FullScreenContent>
+        <Container>
+            <NewsBody news={news} tags={tags} related={related}/>
+        </Container>
+    </Base>
+);
 
-    const router = useRouter();
+export async function getStaticProps({params}) {
+    const newsGet = {
+        filter: JSON.stringify({
+            id: params.news_id
+        }),
+        maxresult: 1
+    };
+    const {news} = await remote('/news', {get:newsGet});
+    const {tags} = await remote('/tag');
 
-    return (
-        <Base title={router.query.news_title}>
-            <FullScreenContent>
-                <div style={{
-                    backgroundImage: "url(/images/home.jpg)",
-                    backgroundPosition: "center center",
-                    width: "100%",
-                    height: 300,
-                }}/>
-            </FullScreenContent>
-            <Container>
-                <NewsBody id={router.query.news_id}/>
-            </Container>
-        </Base>
-    );
+    const relatedNews = {
+        filter: JSON.stringify({
+            tags: news[0].tags.map(t => t.slug)
+        }),
+        maxresult: 4
+    };
+    const {news:related} = await remote('/news', {get:relatedNews});
+
+    return {
+        props: {
+            news_id:news[0].id,
+            news:news[0],
+            tags,
+            related
+        }
+    }
 }
+
+export async function getStaticPaths() {
+    const {news} = await remote('/news');
+
+    const paths = news.map(
+        n => ({params: {news_id: n.id.toString(), news_title: n.title}})
+    );
+
+    return {
+        paths,
+        fallback: false
+    };
+}
+
+export default NewsDetailPage;

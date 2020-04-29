@@ -3,7 +3,6 @@ import '../public/css/styles.css'
 import React from "react";
 import {ThemeProvider} from "@material-ui/styles";
 import {theme} from "../src/Theme";
-import {ConfigContextProvider} from "../src/provider/ConfigContext";
 import {FlashBarContextProvider} from "../src/provider/FlashBarContext";
 import {UserContextProvider} from "../src/provider/UserContext";
 import {CookiesProvider} from "react-cookie";
@@ -12,15 +11,13 @@ import {CookiesProvider} from "react-cookie";
 export default function MyApp({ Component, pageProps }) {
     return (
         <ThemeProvider theme={theme}>
-            <ConfigContextProvider>
-                <FlashBarContextProvider>
-                    <UserContextProvider>
-                        <CookiesProvider>
-                            <Component {...pageProps} />
-                        </CookiesProvider>
-                    </UserContextProvider>
-                </FlashBarContextProvider>
-            </ConfigContextProvider>
+            <FlashBarContextProvider>
+                <UserContextProvider>
+                    <CookiesProvider>
+                        <Component {...pageProps} />
+                    </CookiesProvider>
+                </UserContextProvider>
+            </FlashBarContextProvider>
         </ThemeProvider>
     )
 

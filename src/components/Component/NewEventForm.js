@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext} from 'react'
 import Text from '../form/Text'
 import FormControl from '@material-ui/core/FormControl'
 import Button from '@material-ui/core/Button'
@@ -7,22 +7,12 @@ import MomentUtils from '@date-io/moment'
 import { MuiPickersUtilsProvider, DatePicker } from '@material-ui/pickers'
 import { useStyles } from '../header/LoginRegisterStyle'
 import Divider from '@material-ui/core/Divider'
-import useHttp from '../../hooks/UseHttp'
 import ItemSelect from '../form/Select'
 import FlashBarContext from '../../provider/FlashBarContext'
-import ConfigContext from '../../provider/ConfigContext'
 import PropTypes from 'prop-types'
 import useForm from "../../hooks/useForm";
 
-NewEventForm.propTypes = {
-  addEvent: PropTypes.func.isRequired,
-  onSubmitSuccess: PropTypes.func.isRequired,
-  onSubmitError: PropTypes.func.isRequired
-};
-
-export default function NewEventForm (props)
-{
-  const config = useContext(ConfigContext);
+const NewEventForm = ({addEvent, onSubmitSuccess, chronicles}) => {
   const flashContext = useContext(FlashBarContext);
   const classes = useStyles();
   const [handlerValue, handlerSubmit, event, errorState] = useForm(
@@ -34,22 +24,15 @@ export default function NewEventForm (props)
         'chronicle': value => value !== 0,
       }
   );
-  const [chronicle, setChronicleList] = useState([]);
-
-  useHttp(
-      config.ws_url + '/chronicle',
-      {},
-      setChronicleList,
-      () => flashContext.show('C\'è stato un errore nel caricamento delle cronache', 'error')
-  );
 
   const submit = () => {
     handlerSubmit((response) => {
-      props.addEvent(response.events[0]);
-      props.onSubmitSuccess();
+      addEvent(response.events[0]);
+      onSubmitSuccess();
       flashContext.show('Evento creato con successo', 'success');
     })
   };
+
   return (
     <>
       <MuiPickersUtilsProvider libInstance={moment} utils={MomentUtils}>
@@ -93,7 +76,7 @@ export default function NewEventForm (props)
           color="secondary"
           onChange={e => {handlerValue('chronicle', e.target.value)}}
           error={errorState.chronicle}
-          options={chronicle.chronicles}
+          options={chronicles}
           required
           fullWidth
         />
@@ -104,4 +87,12 @@ export default function NewEventForm (props)
       </MuiPickersUtilsProvider>
     </>
   )
-}
+};
+
+NewEventForm.propTypes = {
+  chronicles: PropTypes.array.isRequired,
+  addEvent: PropTypes.func.isRequired,
+  onSubmitSuccess: PropTypes.func.isRequired,
+};
+
+export default NewEventForm;

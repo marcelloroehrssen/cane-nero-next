@@ -1,14 +1,14 @@
 import React from 'react';
-import Base from "../src/components/layout/Base";
-import FullScreenContent from "../src/components/layout/FullScreenContent";
 import {Container} from "@material-ui/core";
-import Section from "../src/components/layout/Section";
-import NewsListPage from "../src/components/News/NewsListPage";
-import remote from "../src/Utils/Remote";
-import {config} from '../src/Config'
+import Base from "../../../src/components/layout/Base";
+import FullScreenContent from "../../../src/components/layout/FullScreenContent";
+import Section from "../../../src/components/layout/Section";
+import NewsListPage from "../../../src/components/News/NewsListPage";
+import remote from "../../../src/Utils/Remote";
+import {config} from "../../../src/Config"
 
-const News = ({filters, pagination, tags, news}) => (
-    <Base title={'Le ultime notizie dal GDR'}>
+const Author = ({filters, pagination, tags, news, title}) => (
+    <Base title={'Le ultime notizie di ' + title}>
         <FullScreenContent>
             <div style={{
                 backgroundImage: "url(/images/home.jpg)",
@@ -18,7 +18,7 @@ const News = ({filters, pagination, tags, news}) => (
             }}/>
         </FullScreenContent>
         <Container>
-            <Section title={'Le ultime notizie dal GDR'}>
+            <Section title={'Le ultime notizie di ' + title}>
                 <NewsListPage filters={filters}
                               pagination={pagination}
                               news={news}
@@ -36,7 +36,7 @@ export async function getStaticProps({params}) {
         offset: 0
     };
 
-    let filters = {id: null, dates: [], tags: [], author: null};
+    const filters = {id: null, dates: [], tags: [], author: params.author || ''};
     const get = {
         filter: JSON.stringify(filters),
         maxresult: pagination.maxResult,
@@ -45,17 +45,23 @@ export async function getStaticProps({params}) {
     const {news: news} = await remote('/news', {get});
 
     return {
-        props: {filters, pagination, tags, news}
+        props: {filters, pagination, tags, news, title: params.author}
     }
 }
 
 export async function getStaticPaths() {
-    const {tags: tags} = await remote('/tag');
-    const paths = tags.map(
-        tag => ({params: {tag: tag.slug}})
-    );
+    const get = {
+        filter: JSON.stringify({field: 'news', value: 0})
+    };
+    const {user: users} = await remote('/user', {get});
 
-    return {paths, fallback: false};
+    const authorList = users.map(
+        user => ({params: {author: user.username}})
+    );
+    return {
+        paths: authorList,
+        fallback: false
+    };
 }
 
-export default News
+export default Author

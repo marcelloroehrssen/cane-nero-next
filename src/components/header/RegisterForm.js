@@ -109,7 +109,7 @@ export default function RegisterForm(props) {
     };
 
     const submit = async () => {
-        return await handleSubmit(() => {
+        return handleSubmit(() => {
             props.onSubmitSuccess();
             flashContext.show(props.successMessage || 'Registrazione avvenuta con successo', 'success');
         });

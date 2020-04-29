@@ -6,9 +6,8 @@ import {Tooltip} from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
 import FormControl from "@material-ui/core/FormControl";
-import InputLabel from "@material-ui/core/InputLabel";
 import Dropzone from 'react-dropzone-uploader'
-import ConfigContext from "../../provider/ConfigContext";
+import {config} from "../../Config";
 import FormError from "./FormError";
 
 const useStyle = makeStyles({
@@ -30,8 +29,6 @@ function UploadButton() {
 export default function CustomUploader(props)
 {
     const classes = useStyles();
-
-    const config = useContext(ConfigContext);
 
     const getUploadParams = ({meta}) => {
         return {
