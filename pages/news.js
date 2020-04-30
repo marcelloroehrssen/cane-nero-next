@@ -49,13 +49,4 @@ export async function getStaticProps({params}) {
     }
 }
 
-export async function getStaticPaths() {
-    const {tags: tags} = await remote('/tag');
-    const paths = tags.map(
-        tag => ({params: {tag: tag.slug}})
-    );
-
-    return {paths, fallback: false};
-}
-
 export default News
