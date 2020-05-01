@@ -7,31 +7,27 @@ import Head from 'next/head'
 import PropTypes from 'prop-types'
 import CookieBar from "./CookieBar";
 
+const Base = ({children, title}) => (
+    <>
+        <CssBaseline/>
+        <Head>
+            <title>Cane Nero - {title}</title>
+        </Head>
+        <div style={{flexGrow: 1}}>
+            <Header/>
+            {/*{children.filter((e) => e.type.name === 'FullScreenContent')}*/}
+            <Container>
+                {children.filter((e) => e.type.name !== 'FullScreenContent')}
+            </Container>
+            <Footer/>
+        </div>
+        <CookieBar/>
+    </>
+);
+
 Base.propTypes = {
     children: PropTypes.node.isRequired,
     title: PropTypes.string.isRequired
 };
 
-export default function Base(props) {
-    const fullScreenContent = props.children.filter((element) => element.type.name === 'FullScreenContent');
-    const otherContents = props.children.filter((element) => element.type.name !== 'FullScreenContent');
-
-    return (
-        <>
-            <CssBaseline/>
-            <Head>
-                <title>Cane Nero - {props.title}</title>
-            </Head>
-            <div style={{flexGrow: 1}}>
-                <Header/>
-                {fullScreenContent}
-                <Container>
-                    <CssBaseline/>
-                    {otherContents}
-                </Container>
-                <Footer/>
-            </div>
-            <CookieBar />
-        </>
-    )
-}
+export default Base;
