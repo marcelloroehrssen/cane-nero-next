@@ -4,7 +4,7 @@ import UserPage from "../src/components/user/UserPage";
 import remote from "../src/Utils/Remote";
 
 const IlTuoProfilo = ({user}) => (
-    <Base title={'Il tuo profilo '} image={'images/home.jpg'}>
+    <Base title={'Il tuo profilo '} image={'/images/home.jpg'}>
         <UserPage user={user} />
     </Base>
 );

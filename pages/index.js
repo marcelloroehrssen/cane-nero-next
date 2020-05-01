@@ -5,7 +5,7 @@ import remote from "../src/Utils/Remote";
 import {config} from "../src/Config";
 
 const Index = ({news, filters}) => (
-    <Base title={"Homepage"} image={'images/home.jpg'}>
+    <Base title={"Homepage"} image={'/images/home.jpg'}>
         <NewsList title={"In Evidenza"} news={news} filters={filters}/>
     </Base>
 );

@@ -5,7 +5,7 @@ import Calendar from "../src/components/Component/Calendar";
 import remote from "../src/Utils/Remote";
 
 const Eventi = ({events, chronicles}) => (
-    <Base title={"Eventi di gioco di ruolo a Roma in programma"} image={'images/home.jpg'}>
+    <Base title={"Eventi di gioco di ruolo a Roma in programma"} image={'/images/home.jpg'}>
         <Section title={"Eventi in programma"}>
             <Calendar events={events} chronicles={chronicles}/>
         </Section>

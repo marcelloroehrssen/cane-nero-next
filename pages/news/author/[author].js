@@ -6,7 +6,7 @@ import remote from "../../../src/Utils/Remote";
 import {config} from "../../../src/Config"
 
 const Author = ({filters, pagination, tags, news, title}) => (
-    <Base title={'Le ultime notizie di ' + title} image={'images/home.jpg'}>
+    <Base title={'Le ultime notizie di ' + title} image={'/images/home.jpg'}>
         <Section title={'Le ultime notizie di ' + title}>
             <NewsListPage filters={filters}
                           pagination={pagination}

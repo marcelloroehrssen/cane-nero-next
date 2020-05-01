@@ -6,7 +6,7 @@ import ChronicleCard from "../src/components/card/ChronicleCard";
 import remote from "../src/Utils/Remote";
 
 const OurChronicle = ({chronicles}) => (
-    <Base title={"Le nostre cronache"} image={'images/home.jpg'}>
+    <Base title={"Le nostre cronache"} image={'/images/home.jpg'}>
         <Section title={"Le nostre cronache"}>
             <Grid container spacing={2} alignItems="stretch" direction="row" justify="center">
                 {

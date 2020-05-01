@@ -4,7 +4,7 @@ import PaymentPage from "../src/components/payment/PaymentPage";
 import remote from "../src/Utils/Remote";
 
 const ITuoiPagamenti = ({payments, user, canEdit, hasError, users}) => (
-    <Base title={'I tuoi pagamenti'} image={'images/home.jpg'}>
+    <Base title={'I tuoi pagamenti'} image={'/images/home.jpg'}>
         <PaymentPage payments={payments} user={user} canEdit={canEdit} hasError={hasError} users={users}/>
     </Base>
 );

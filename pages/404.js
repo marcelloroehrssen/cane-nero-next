@@ -107,7 +107,7 @@ const Custom404 = () => {
     };
 
     return (
-        <Base title={'Pagina non trovata'} image={'images/home.jpg'}>
+        <Base title={'Pagina non trovata'} image={'/images/home.jpg'}>
             <Section title={'Pagina non trovata'}>
                 <Typography>
                     La pagina che stavi cercando non è stata trovata, adesso hai due possibilità:

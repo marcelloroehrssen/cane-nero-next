@@ -14,7 +14,7 @@ const PrivacySection = ({title, children}) => (
 
 
 const Privacy = () => (
-    <Base title={"Privacy Policy"} image={'images/home.jpg'}>
+    <Base title={"Privacy Policy"} image={'/images/home.jpg'}>
         <Section title={"Normativa sulla privacy"}>
             <PrivacySection title={"A. Introduzione"}>
                 <ol>

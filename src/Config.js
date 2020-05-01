@@ -1,5 +1,5 @@
 export const config = {
-  ws_url: 'https://dev-api.cane-nero.it',
-  max_news_per_homepage: 4,
-  max_news_per_page: 2
+  ws_url: process.env.ws_url,
+  max_news_per_homepage: process.env.max_news_per_homepage,
+  max_news_per_page: process.env.max_news_per_page
 };

@@ -4,7 +4,7 @@ import NewsBody from "../../../src/components/News/NewsBody";
 import remote from "../../../src/Utils/Remote";
 
 const NewsDetailPage = ({news, tags, related}) => (
-    <Base title={news.title} image={'images/home.jpg'}>
+    <Base title={news.title} image={'/images/home.jpg'}>
         <NewsBody news={news} tags={tags} related={related}/>
     </Base>
 );
