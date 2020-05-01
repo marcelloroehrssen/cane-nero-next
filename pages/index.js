@@ -13,12 +13,13 @@ const Index = ({news, filters}) => (
 export async function getStaticProps() {
     const get = {
         filters: {id: null, dates: [], tags: ['in-evidenza'], author: null},
-        maxresult: config.max_news_per_homepage,
+        maxresult: config.page.index.max_news_per_homepage,
         offset: 0
     };
     const {news} = await remote('/news', {get});
 
     return {
+        revalidate: config.page.index.revalidate,
         props: {news, filters:get}
     }
 }

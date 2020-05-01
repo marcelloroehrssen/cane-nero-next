@@ -4,6 +4,7 @@ import Section from "../src/components/layout/Section";
 import Grid from "@material-ui/core/Grid";
 import ChronicleCard from "../src/components/card/ChronicleCard";
 import remote from "../src/Utils/Remote";
+import {config} from "../src/Config";
 
 const OurChronicle = ({chronicles}) => (
     <Base title={"Le nostre cronache"} image={'/images/home.jpg'}>
@@ -27,6 +28,7 @@ export async function getStaticProps({params}) {
     const {chronicles} = await remote('/chronicle');
 
     return {
+        revalidate: config.page.leNostreCronache.revalidate,
         props: {chronicles}
     }
 }

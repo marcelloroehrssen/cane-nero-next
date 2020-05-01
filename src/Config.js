@@ -1,5 +1,30 @@
 export const config = {
   ws_url: process.env.ws_url,
-  max_news_per_homepage: process.env.max_news_per_homepage,
-  max_news_per_page: process.env.max_news_per_page
+  page: {
+    eventi: {
+      revalidate: 3600,
+    },
+    index: {
+      revalidate: 3600,
+      max_news_per_homepage: 4,
+    },
+    leNostreCronache: {
+      revalidate: 3600,
+    },
+    news: {
+      revalidate: 3600,
+      max_news_per_page: 4,
+    },
+    news_tags: {
+      revalidate: 3600,
+      max_news_per_page: 4,
+    },
+    news_author: {
+      revalidate: 3600,
+      max_news_per_page: 4,
+    },
+    news_news: {
+      revalidate: 3600,
+    },
+  }
 };

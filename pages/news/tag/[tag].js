@@ -21,7 +21,7 @@ export async function getStaticProps({params}) {
     const {tags: tags} = await remote('/tag');
 
     let pagination = {
-        maxResult: config.max_news_per_page,
+        maxResult: config.page.news_tag.max_news_per_page,
         offset: 0
     };
 
@@ -36,6 +36,7 @@ export async function getStaticProps({params}) {
     const currentTag = tags.find(tag => tag.slug === params.tag);
 
     return {
+        revalidate: config.page.news_tag.revalidate,
         props: {filters, pagination, tags, news, title: currentTag.label}
     }
 }

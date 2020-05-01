@@ -2,6 +2,7 @@ import React from 'react';
 import Base from "../../../src/components/layout/Base";
 import NewsBody from "../../../src/components/News/NewsBody";
 import remote from "../../../src/Utils/Remote";
+import {config} from "../../../src/Config";
 
 const NewsDetailPage = ({news, tags, related}) => (
     <Base title={news.title} image={'/images/home.jpg'}>
@@ -28,6 +29,7 @@ export async function getStaticProps({params}) {
     const {news:related} = await remote('/news', {get:relatedNews});
 
     return {
+        revalidate: config.page.news_news.revalidate,
         props: {
             news_id:news[0].id,
             news:news[0],

@@ -3,6 +3,7 @@ import Base from "../src/components/layout/Base";
 import Section from "../src/components/layout/Section";
 import Calendar from "../src/components/Component/Calendar";
 import remote from "../src/Utils/Remote";
+import {config} from "../src/Config";
 
 const Eventi = ({events, chronicles}) => (
     <Base title={"Eventi di gioco di ruolo a Roma in programma"} image={'/images/home.jpg'}>
@@ -21,7 +22,10 @@ export async function getStaticProps({params}) {
     const {events} = await remote('/event', {get});
     const {chronicles} = await remote('/chronicle');
 
-    return {props: {events, chronicles}}
+    return {
+        revalidate: config.page.eventi.revalidate,
+        props: {events, chronicles}
+    }
 }
 
 export default Eventi;
