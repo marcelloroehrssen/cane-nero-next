@@ -1,23 +1,11 @@
 import React from 'react';
 import Base from "../../../src/components/layout/Base";
-import FullScreenContent from "../../../src/components/layout/FullScreenContent";
-import {Container} from "@material-ui/core";
 import NewsBody from "../../../src/components/News/NewsBody";
 import remote from "../../../src/Utils/Remote";
 
 const NewsDetailPage = ({news, tags, related}) => (
-    <Base title={news.title}>
-        <FullScreenContent>
-            <div style={{
-                backgroundImage: "url(/images/home.jpg)",
-                backgroundPosition: "center center",
-                width: "100%",
-                height: 300,
-            }}/>
-        </FullScreenContent>
-        <Container>
-            <NewsBody news={news} tags={tags} related={related}/>
-        </Container>
+    <Base title={news.title} image={'images/home.jpg'}>
+        <NewsBody news={news} tags={tags} related={related}/>
     </Base>
 );
 

@@ -7,7 +7,7 @@ import Head from 'next/head'
 import PropTypes from 'prop-types'
 import CookieBar from "./CookieBar";
 
-const Base = ({children, title}) => (
+const Base = ({children, title, image}) => (
     <>
         <CssBaseline/>
         <Head>
@@ -15,9 +15,14 @@ const Base = ({children, title}) => (
         </Head>
         <div style={{flexGrow: 1}}>
             <Header/>
-            {children.filter((e) => e.type.name === 'FullScreenContent')}
+            <div style={{
+                backgroundImage: 'url(' + image + ')',
+                backgroundPosition: "center center",
+                width: "100%",
+                height: 300,
+            }}/>
             <Container>
-                {children.filter((e) => e.type.name !== 'FullScreenContent')}
+                {children}
             </Container>
             <Footer/>
         </div>

@@ -1,5 +1,4 @@
 import Base from "../src/components/layout/Base";
-import FullScreenContent from "../src/components/layout/FullScreenContent";
 import React from "react";
 import Section from "../src/components/layout/Section";
 import Typography from "@material-ui/core/Typography";
@@ -15,15 +14,7 @@ const PrivacySection = ({title, children}) => (
 
 
 const Privacy = () => (
-    <Base title={"Privacy Policy"}>
-        <FullScreenContent>
-            <div style={{
-                backgroundImage: "url(images/home.jpg)",
-                backgroundPosition: "center center",
-                width: "100%",
-                height: 300,
-            }}/>
-        </FullScreenContent>
+    <Base title={"Privacy Policy"} image={'images/home.jpg'}>
         <Section title={"Normativa sulla privacy"}>
             <PrivacySection title={"A. Introduzione"}>
                 <ol>

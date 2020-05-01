@@ -1,19 +1,10 @@
 import React from 'react';
 import Base from "../src/components/layout/Base";
-import FullScreenContent from "../src/components/layout/FullScreenContent";
 import UserPage from "../src/components/user/UserPage";
 import remote from "../src/Utils/Remote";
 
 const IlTuoProfilo = ({user}) => (
-    <Base title={'Il tuo profilo '}>
-        <FullScreenContent>
-            <div style={{
-                backgroundImage: "url(/images/home.jpg)",
-                backgroundPosition: "center center",
-                width: "100%",
-                height: 300,
-            }}/>
-        </FullScreenContent>
+    <Base title={'Il tuo profilo '} image={'images/home.jpg'}>
         <UserPage user={user} />
     </Base>
 );

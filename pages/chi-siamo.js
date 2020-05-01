@@ -1,19 +1,10 @@
 import React from 'react';
 import Base from "../src/components/layout/Base";
-import FullScreenContent from "../src/components/layout/FullScreenContent";
 import Section from "../src/components/layout/Section";
 import Typography from "@material-ui/core/Typography";
 
 const ChiSiamo = () => (
-    <Base title={"Chi siamo"}>
-        <FullScreenContent>
-            <div style={{
-                backgroundImage: "url(images/home.jpg)",
-                backgroundPosition: "center center",
-                width: "100%",
-                height: 300,
-            }}/>
-        </FullScreenContent>
+    <Base title={"Chi siamo"} image={'images/home.jpg'}>
         <Section title={"Chi siamo"}>
             <Typography gutterBottom variant="body1" component="p">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et

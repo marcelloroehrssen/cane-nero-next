@@ -1,5 +1,4 @@
 import Base from "../src/components/layout/Base";
-import FullScreenContent from "../src/components/layout/FullScreenContent";
 import React, {useEffect, useState} from "react";
 import Section from "../src/components/layout/Section";
 import Link from "next/link";
@@ -108,15 +107,7 @@ const Custom404 = () => {
     };
 
     return (
-        <Base title={'Pagina non trovata'}>
-            <FullScreenContent>
-                <div style={{
-                    backgroundImage: "url(images/home.jpg)",
-                    backgroundPosition: "center center",
-                    width: "100%",
-                    height: 300,
-                }}/>
-            </FullScreenContent>
+        <Base title={'Pagina non trovata'} image={'images/home.jpg'}>
             <Section title={'Pagina non trovata'}>
                 <Typography>
                     La pagina che stavi cercando non è stata trovata, adesso hai due possibilità:
