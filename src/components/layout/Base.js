@@ -15,7 +15,7 @@ const Base = ({children, title}) => (
         </Head>
         <div style={{flexGrow: 1}}>
             <Header/>
-            {/*{children.filter((e) => e.type.name === 'FullScreenContent')}*/}
+            {children.filter((e) => e.type.name === 'FullScreenContent')}
             <Container>
                 {children.filter((e) => e.type.name !== 'FullScreenContent')}
             </Container>
