@@ -3,12 +3,27 @@ import Base from "../../../src/components/layout/Base";
 import NewsBody from "../../../src/components/News/NewsBody";
 import remote from "../../../src/Utils/Remote";
 import {config} from "../../../src/Config";
+import { useRouter } from 'next/router'
+import Backdrop from "@material-ui/core/Backdrop";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
-const NewsDetailPage = ({news, tags, related}) => (
-    <Base title={news.title} image={'/images/home.jpg'}>
-        <NewsBody news={news} tags={tags} related={related}/>
-    </Base>
-);
+const NewsDetailPage = ({news, tags, related}) => {
+    const router = useRouter();
+
+    if (!router.isFallback) {
+        return (
+            <Backdrop open={true}>
+                <CircularProgress color="inherit" />
+            </Backdrop>
+        );
+    }
+
+    return (
+        <Base title={news.title} image={'/images/home.jpg'}>
+            <NewsBody news={news} tags={tags} related={related}/>
+        </Base>
+    );
+}
 
 export async function getStaticProps({params}) {
     const newsGet = {
@@ -48,7 +63,7 @@ export async function getStaticPaths() {
 
     return {
         paths,
-        fallback: false
+        fallback: true
     };
 }
 

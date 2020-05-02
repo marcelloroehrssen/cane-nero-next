@@ -4,17 +4,33 @@ import Section from "../../../src/components/layout/Section";
 import NewsListPage from "../../../src/components/News/NewsListPage";
 import remote from "../../../src/Utils/Remote";
 import {config} from "../../../src/Config"
+import {useRouter} from "next/router";
+import Backdrop from "@material-ui/core/Backdrop";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
-const Author = ({filters, pagination, tags, news, title}) => (
-    <Base title={'Le ultime notizie di ' + title} image={'/images/home.jpg'}>
-        <Section title={'Le ultime notizie di ' + title}>
-            <NewsListPage filters={filters}
-                          pagination={pagination}
-                          news={news}
-                          tags={tags}/>
-        </Section>
-    </Base>
-);
+const Author = ({filters, pagination, tags, news, title}) => {
+
+    const router = useRouter();
+
+    if (!router.isFallback) {
+        return (
+            <Backdrop open={true}>
+                <CircularProgress color="inherit" />
+            </Backdrop>
+        );
+    }
+
+    return (
+        <Base title={'Le ultime notizie di ' + title} image={'/images/home.jpg'}>
+            <Section title={'Le ultime notizie di ' + title}>
+                <NewsListPage filters={filters}
+                              pagination={pagination}
+                              news={news}
+                              tags={tags}/>
+            </Section>
+        </Base>
+    );
+}
 
 export async function getStaticProps({params}) {
     const {tags: tags} = await remote('/tag');
@@ -49,7 +65,7 @@ export async function getStaticPaths() {
     );
     return {
         paths: authorList,
-        fallback: false
+        fallback: true
     };
 }
 

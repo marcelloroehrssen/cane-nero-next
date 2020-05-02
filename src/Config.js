@@ -12,19 +12,19 @@ export const config = {
       revalidate: 3600,
     },
     news: {
-      revalidate: 3600,
+      revalidate: 1800,
       max_news_per_page: 4,
     },
     news_tags: {
-      revalidate: 3600,
+      revalidate: 1800,
       max_news_per_page: 4,
     },
     news_author: {
-      revalidate: 3600,
+      revalidate: 1800,
       max_news_per_page: 4,
     },
     news_news: {
-      revalidate: 3600,
+      revalidate: 1800,
     },
   }
 };

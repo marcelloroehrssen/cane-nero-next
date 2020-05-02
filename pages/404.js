@@ -40,14 +40,14 @@ const GAME_STATE = {
 const Custom404 = () => {
 
     const cards = [
-        {image: "images/paolo-leccese.jpg", name: 'paolo'},
-        {image: "images/viviana-de-simone.jpg", name: 'viviana'},
-        {image: "images/gabriele-cortina.jpg", name: 'gabriele'},
-        {image: "images/flavio-finocchi.jpg", name: 'flavio'},
-        {image: "images/jonathan-alfieri.jpg", name: 'jonathan'},
-        {image: "images/marcello-roehrssen.jpg", name: 'marcello'},
-        {image: "images/pamela-ceccarelli.jpg", name: 'pamela'},
-        {image: "images/paolo-micheli.jpg", name: 'paolom'},
+        {image: "/images/paolo-leccese.jpg", name: 'paolo'},
+        {image: "/images/viviana-de-simone.jpg", name: 'viviana'},
+        {image: "/images/gabriele-cortina.jpg", name: 'gabriele'},
+        {image: "/images/flavio-finocchi.jpg", name: 'flavio'},
+        {image: "/images/jonathan-alfieri.jpg", name: 'jonathan'},
+        {image: "/images/marcello-roehrssen.jpg", name: 'marcello'},
+        {image: "/images/pamela-ceccarelli.jpg", name: 'pamela'},
+        {image: "/images/paolo-micheli.jpg", name: 'paolom'},
     ];
 
     const [hasStarted, setHasStarted] = useState(false);

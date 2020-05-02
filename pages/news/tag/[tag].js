@@ -4,8 +4,23 @@ import Section from "../../../src/components/layout/Section";
 import NewsListPage from "../../../src/components/News/NewsListPage";
 import remote from "../../../src/Utils/Remote";
 import {config} from "../../../src/Config"
+import {useRouter} from "next/router";
+import Backdrop from "@material-ui/core/Backdrop";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
-const Tag = ({filters, pagination, tags, news, title}) => (
+const Tag = ({filters, pagination, tags, news, title}) => {
+
+    const router = useRouter();
+
+    if (!router.isFallback) {
+        return (
+            <Backdrop open={true}>
+                <CircularProgress color="inherit" />
+            </Backdrop>
+        );
+    }
+
+    return (
         <Base title={'Le ultime notizie su ' + title} image={'/images/home.jpg'}>
             <Section title={'Le ultime notizie su ' + title}>
                 <NewsListPage filters={filters}
@@ -15,7 +30,7 @@ const Tag = ({filters, pagination, tags, news, title}) => (
             </Section>
         </Base>
     );
-
+}
 
 export async function getStaticProps({params}) {
     const {tags: tags} = await remote('/tag');
@@ -47,7 +62,7 @@ export async function getStaticPaths() {
         tag => ({params: {tag: tag.slug}})
     );
 
-    return {paths, fallback: false};
+    return {paths, fallback: true};
 }
 
 export default Tag
