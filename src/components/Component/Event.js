@@ -4,7 +4,7 @@ import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 import Typography from '@material-ui/core/Typography'
 import makeStyles from '@material-ui/core/styles/makeStyles'
-import Link from '@material-ui/core/Link'
+import Link from 'next/link'
 import Tooltip from '@material-ui/core/Tooltip'
 import IconButton from '@material-ui/core/IconButton'
 import CardActions from '@material-ui/core/CardActions'
@@ -55,9 +55,7 @@ export default function Event(props) {
                 <Typography variant="body2" component="p">
                     {"l'evento si terrà "}
                     <Tooltip title={moment(props.event.date).locale('it').format('dddd, DD MMMM YYYY')} arrow>
-                        <Link color={'secondary'}>
-                            {moment(props.event.date).locale('it').fromNow()}
-                        </Link>
+                       <a href="#" style={{color:theme.palette.secondary.main}}>{moment(props.event.date).locale('it').fromNow()}</a>
                     </Tooltip>
                 </Typography>
                 <Typography variant="body2" component="p">
@@ -93,7 +91,7 @@ export default function Event(props) {
                 open={alertShow}
                 title={'Sei sicuro?'}
                 text={"Sei sicuro di voler eliminare questo evento? L'operazione sarà irreversibile"}
-                onConfirm={props.onDelete(props.event)}
+                onConfirm={() => {props.onDelete(props.event)}}
                 onCancel={onCancel}/>
         </Card>
     )

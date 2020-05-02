@@ -14,63 +14,53 @@ import CardHeader from "@material-ui/core/CardHeader";
 import Avatar from "@material-ui/core/Avatar";
 import Grid from "@material-ui/core/Grid";
 import Link from "next/link";
-import {makeStyles} from "@material-ui/core/styles";
 
-const useStyle = makeStyles({});
-
-function ActionButton(props) {
-    if (!props.action) {
+const ActionButton = ({action, news})  => {
+    if (!action) {
         return <></>;
     }
 
     return (
-        <Tooltip title={props.action.name} arrow placement={"top"}>
-            <IconButton onClick={props.action.callback(props.news)}>
-                {props.action.icon}
-            </IconButton>
+        <Tooltip title={action.name} arrow placement={"top"}>
+            <IconButton onClick={action.callback(news)}>{action.icon}</IconButton>
         </Tooltip>
     );
 }
 
-const NewsCard = (props) => (
+const NewsCard = ({news, small, activeAction}) => (
     <Card>
         <CardActionArea component={'article'}>
             <CardHeader
                 avatar={
-                    <Avatar src={props.news.author.avatar}
-                            alt={props.news.author.firstName + ' ' + props.news.author.lastName}>
+                    <Avatar src={news.author.avatar} alt={news.author.firstName + ' ' + news.author.lastName}>
                         <a>
-                            {
-                                props.news.author.firstName.slice(0, 1).toUpperCase()
-                                + props.news.author.lastName.slice(0, 1).toUpperCase()
-                            }
+                            {news.author.firstName.slice(0, 1).toUpperCase() + news.author.lastName.slice(0, 1).toUpperCase()}
                         </a>
                     </Avatar>
                 }
                 title={
-                    <Link href={'/news?author=' + props.news.author.username}
-                          as={'/news/author/' + props.news.author.username}>
-                        <a className={'MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-body2 MuiTypography-colorInherit'}>{props.news.author.firstName + ' ' + props.news.author.lastName}</a>
+                    <Link href={'/news?author=' + news.author.username}
+                          as={'/news/author/' + news.author.username}>
+                        <a className={'MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-body2 MuiTypography-colorInherit'}>{news.author.firstName + ' ' + news.author.lastName}</a>
                     </Link>
                 }
-                subheader={moment(props.news.date).locale('it').format('dddd, gg MMMM YYYY')}
+                subheader={moment(news.date).locale('it').format('dddd, gg MMMM YYYY')}
             />
-            <CardMedia style={{height: 400}} image={props.news.image} title={props.news.title}/>
+            {!small && <CardMedia style={{height: 400}} image={news.image} title={news.title}/>}
             <CardContent>
                 <Typography gutterBottom
                             variant="h5"
                             color={'secondary'}>
                     <Link href={'/news/[news_id]/[news_title]'}
-                          as={'/news/' + props.news.id + '/' + props.news.title}>
-                        <a className={'MuiTypography-root MuiLink-root MuiTypography-h4 MuiLink-underlineHover MuiTypography-body2 MuiTypography-colorInherit'}>{props.news.title}</a>
+                          as={'/news/' + news.id + '/' + news.title}>
+                        <a className={'MuiTypography-root MuiLink-root MuiTypography-h4 MuiLink-underlineHover MuiTypography-body2 MuiTypography-colorInherit'}>{news.title}</a>
                     </Link>
                 </Typography>
             </CardContent>
             <CardActions>
-                <ActionButton action={props.activeAction} news={props.news}/>
                 <Grid container direction="row" justify="flex-start" alignItems="center" spacing={1}>
                     {
-                        props.news.tags.map((tag) => {
+                        news.tags.map((tag) => {
                             return (
                                 <Grid item key={tag.id}>
                                     <Link href={'/news/tag/[tag]'}
@@ -83,13 +73,18 @@ const NewsCard = (props) => (
                     }
                 </Grid>
             </CardActions>
+            <CardActions>
+                {activeAction && !Array.isArray(activeAction) && <ActionButton action={activeAction} news={news}/>}
+                {activeAction && Array.isArray(activeAction) && activeAction.map(a => <ActionButton key={a.name} action={a} news={news}/>)}
+            </CardActions>
         </CardActionArea>
     </Card>
 );
 
 NewsCard.propTypes = {
     news: PropTypes.object.isRequired,
-    activeAction: PropTypes.object,
+    activeAction: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+    small: PropTypes.bool
 };
 
 export default NewsCard;

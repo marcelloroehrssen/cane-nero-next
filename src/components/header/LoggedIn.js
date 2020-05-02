@@ -11,6 +11,7 @@ import MenuIcon from '@material-ui/icons/Menu'
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn'
 import MeetingRoomIcon from '@material-ui/icons/MeetingRoom'
 import InfoIcon from '@material-ui/icons/Info';
+import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
 import UserContext from '../../provider/UserContext'
 import LoginRegister from './LoginRegister'
 import Drawer from '@material-ui/core/Drawer'
@@ -23,6 +24,8 @@ import useMediaQuery from '@material-ui/core/useMediaQuery'
 import NavLink from './NavLink'
 import Badge from "@material-ui/core/Badge";
 import Link from "@material-ui/core/Link";
+import RoleCheck from "../RoleCheck";
+import EventAvailableIcon from '@material-ui/icons/EventAvailable';
 
 export default function LoggedIn() {
     const userContext = useContext(UserContext);
@@ -50,11 +53,7 @@ export default function LoggedIn() {
                     </Badge>
                 </IconButton>
                 <Drawer anchor={'left'} open={open} onClose={() => setOpen(false)}>
-                    <div
-                        className={{width: 450}}
-                        role="presentation"
-                        onClick={() => setOpen(false)}
-                    >
+                    <div className={{width: 450}} role="presentation" onClick={() => setOpen(false)}>
                         <List>
                             <ListItem>
                                 <Grid container direction="row" justify="flex-start" alignItems="center" spacing={2}>
@@ -72,40 +71,53 @@ export default function LoggedIn() {
                             </ListItem>
                             <Divider/>
                             <NavLink show={!matches} anchor={'side'}/>
-                            <ListItem button onClick={() => {
-                                window.location.href = '/il-tuo-profilo'
-                            }}>
-                                <ListItemIcon>
-                                    <AccountCircleIcon color="secondary" fontSize="small"/>
-                                </ListItemIcon>
-                                <ListItemText primary="Il tuo Profilo" fontSize="small"/>
+                            <RoleCheck role={"ROLE_ADMIN"}>
+                                <ListItem>
+                                    <ListItemText primary="Amministrazione" fontSize="small" style={{fontWeight:"bold"}}/>
+                                </ListItem>
+                                <ListItem button onClick={() => {window.location.href = '/incoming-article'}}>
+                                    <ListItemIcon>
+                                        <PlaylistAddIcon color="secondary"/>
+                                    </ListItemIcon>
+                                    <ListItemText primary="Articoli pubblicati"/>
+                                </ListItem>
+                                <ListItem button onClick={() => {window.location.href = '/incoming-events'}}>
+                                    <ListItemIcon>
+                                        <EventAvailableIcon color="secondary"/>
+                                    </ListItemIcon>
+                                    <ListItemText primary="Eventi pubblicati"/>
+                                </ListItem>
+                                <Divider/>
+                            </RoleCheck>
+                            <ListItem>
+                                <ListItemText primary="Privato" fontSize="small" style={{fontWeight:"bold"}}/>
                             </ListItem>
-                            <ListItem button onClick={() => {
-                                window.location.href = '/i-tuoi-pagamenti'
-                            }}>
+                            <ListItem button onClick={() => {window.location.href = '/il-tuo-profilo'}}>
+                                <ListItemIcon>
+                                    <AccountCircleIcon color="secondary"/>
+                                </ListItemIcon>
+                                <ListItemText primary="Il tuo Profilo"/>
+                            </ListItem>
+                            <ListItem button onClick={() => {window.location.href = '/i-tuoi-pagamenti'}}>
                                 <ListItemIcon>
                                     <Badge color={"error"} badgeContent={userContext.user.hasProblem.payments ? 1 : 0}>
-                                        <MonetizationOnIcon color="secondary" fontSize="small"/>
+                                        <MonetizationOnIcon color="secondary"/>
                                     </Badge>
                                 </ListItemIcon>
-                                <ListItemText primary="La tua Iscrizione" fontSize="small"/>
+                                <ListItemText primary="La tua Iscrizione"/>
                             </ListItem>
-                            <ListItem button onClick={() => {
-                                window.location.href = '/privacy'
-                            }}>
+                            <ListItem button onClick={() => {window.location.href = '/privacy'}}>
                                 <ListItemIcon>
-                                    <InfoIcon color="secondary" fontSize="small"/>
+                                    <InfoIcon color="secondary"/>
                                 </ListItemIcon>
-                                <ListItemText primary="Privacy" fontSize="small"/>
+                                <ListItemText primary="Privacy"/>
                             </ListItem>
                             <Divider/>
-                            <ListItem button onClick={() => {
-                                userContext.logout()
-                            }}>
+                            <ListItem button onClick={() => {userContext.logout()}}>
                                 <ListItemIcon>
-                                    <MeetingRoomIcon color="secondary" fontSize="small"/>
+                                    <MeetingRoomIcon color="secondary"/>
                                 </ListItemIcon>
-                                <ListItemText primary="Logout" fontSize="small"/>
+                                <ListItemText primary="Logout"/>
                             </ListItem>
                         </List>
                     </div>

@@ -2,6 +2,8 @@ import React from 'react';
 import Base from "../src/components/layout/Base";
 import PaymentPage from "../src/components/payment/PaymentPage";
 import remote from "../src/Utils/Remote";
+import {LoginHash} from "../src/Utils/LoginHash";
+import {HasRole} from "../src/Utils/HasRole";
 
 const ITuoiPagamenti = ({payments, user, canEdit, hasError, users}) => (
     <Base title={'I tuoi pagamenti'} image={'/images/home.jpg'}>
@@ -10,10 +12,8 @@ const ITuoiPagamenti = ({payments, user, canEdit, hasError, users}) => (
 );
 
 export async function getServerSideProps({req, res}) {
-    const login = req.headers.cookie.split('; ')
-        .map(c => c.split('='))
-        .filter(c => c[0] === 'login')
-        .shift()[1];
+    const login = LoginHash(req);
+
     const {payments} = await remote(
         '/payment',
         {headers: {'client-security-token': login}}
@@ -22,7 +22,7 @@ export async function getServerSideProps({req, res}) {
         '/user',
         {headers: {'client-security-token': login}}
     );
-    const canEdit = user.roles.indexOf('ROLE_ADMIN') > -1;
+    const canEdit = HasRole(user, 'ROLE_ADMIN');
     const hasError = user.hasProblem.payments;
 
     let users = [];

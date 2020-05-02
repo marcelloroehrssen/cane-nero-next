@@ -58,7 +58,7 @@ const Calendar = ({events, chronicles}) => {
         setMonth(month);
     };
 
-    const removeEvent = eventToRemove => async () => {
+    const removeEvent = async eventToRemove => {
         await deleteFunction(
             '/event', eventToRemove.id,
             'Evento cancellato con successo',
