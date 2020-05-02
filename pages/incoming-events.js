@@ -27,23 +27,25 @@ const IncomingEvents = ({initialEvents}) => {
                     initialEvents.map(
                         (e) => (
                             <Section key={e.month} title={e.month} component="h5" variant="h5">
-                                <LengthCheck obj={e.events} op={'gt'} min={0} msg={
-                                    <Grid item xs={12}>
-                                        <Typography align={'center'}>
-                                            <em>Non ci sono eventi in programma!</em>
-                                        </Typography>
-                                    </Grid>
-                                }>
-                                    {
-                                        e.events.map(event => {
-                                            return (
-                                                <Grid key={event.id} item xs={12} md={4}>
-                                                    <Event event={event} onDelete={removeEvent}/>
-                                                </Grid>
-                                            )
-                                        })
-                                    }
-                                </LengthCheck>
+                                <Grid container spacing={2} alignItems="stretch" direction="row" justify="center">
+                                    <LengthCheck obj={e.events} op={'gt'} min={0} msg={
+                                        <Grid item xs={12}>
+                                            <Typography align={'center'}>
+                                                <em>Non ci sono eventi in programma!</em>
+                                            </Typography>
+                                        </Grid>
+                                    }>
+                                        {
+                                            e.events.map(event => {
+                                                return (
+                                                    <Grid key={event.id} item xs={12} md={4}>
+                                                        <Event event={event} onDelete={removeEvent}/>
+                                                    </Grid>
+                                                )
+                                            })
+                                        }
+                                    </LengthCheck>
+                                </Grid>
                             </Section>
                         )
                     )
