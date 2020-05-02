@@ -10,7 +10,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 const NewsDetailPage = ({news, tags, related}) => {
     const router = useRouter();
 
-    if (!router.isFallback) {
+    if (router.isFallback) {
         return (
             <Backdrop open={true}>
                 <CircularProgress color="inherit" />

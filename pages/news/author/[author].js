@@ -12,7 +12,7 @@ const Author = ({filters, pagination, tags, news, title}) => {
 
     const router = useRouter();
 
-    if (!router.isFallback) {
+    if (router.isFallback) {
         return (
             <Backdrop open={true}>
                 <CircularProgress color="inherit" />
