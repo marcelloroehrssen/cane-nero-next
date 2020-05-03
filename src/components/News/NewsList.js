@@ -14,10 +14,18 @@ import useTheme from '@material-ui/core/styles/useTheme'
 import PropTypes from 'prop-types'
 import useSWR, {mutate} from "swr";
 import remote from "../../Utils/Remote";
+import NextLink from "next/link";
+import MuiLink from "@material-ui/core/Link";
 
 NewsList.propTypes = {
     title: PropTypes.string.isRequired
 };
+
+const NewsLink = ({href, as, title, ...props}) => (
+    <NextLink href={href} as={as} passHref>
+        <MuiLink {...props}>{title}</MuiLink>
+    </NextLink>
+);
 
 export default function NewsList({title, news, filters}) {
     const theme = useTheme();
@@ -42,26 +50,26 @@ export default function NewsList({title, news, filters}) {
     return (
         <Section className={''} title={title}>
             <div style={{flexGrow: 1}}>
-                <GridList cols={12} cellHeight={400}>
+                <GridList cols={12} cellHeight={400} component={'div'}>
                     {
                         data.map(
                             (news, index) => (
                                 <GridListTile
                                     key={news.id}
+                                    component={'article'}
                                     className={'news-container'}
                                     style={{cursor: "pointer"}}
                                     cols={(index % 3) === 0 ? 12 : 6}
-                                    href={'/news/[news_id]/[news_title]?news_id=' + news.id + '&news_title=' + news.title}
-                                    as={'/news/' + news.id + '/' + news.title}>
+                                    onClick={() => window.location.href='/news/' + news.id + '/' + news.title}
+                                >
                                     <img src={news.image} alt={news.title}/>
                                     <GridListTileBar
-                                        component={Link}
-                                        href={'/news/[news_id]/[news_title]?news_id=' + news.id + '&news_title=' + news.title}
-                                        as={'/news/' + news.id + '/' + news.title}
-                                        title={news.title}
+                                        title={
+                                            <Link href={'/news/[news_id]/[news_title]'} as={'/news/' + news.id + '/' + news.title} color={"secondary"}>{news.title}</Link>
+                                        }
                                         actionIcon={
                                             <IconButton component={Link}
-                                                        href={'/news/[news_id]/[news_title]?news_id=' + news.id + '&news_title=' + news.title}
+                                                        href={'/news/[news_id]/[news_title]'}
                                                         as={'/news/' + news.id + '/' + news.title}>
                                                 <InfoIcon color={'secondary'}/>
                                             </IconButton>

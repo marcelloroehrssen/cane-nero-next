@@ -6,9 +6,8 @@ import Grid from "@material-ui/core/Grid";
 const NewsRelatedTag = ({tags}) => (
     <Grid container direction="row" justify="flex-start" alignItems="center" spacing={1}>
         {
-            tags.map(tag => <Grid item>
-                <Chip key={tag.id}
-                      label={tag.label}
+            tags.map(tag => <Grid key={tag.id} item>
+                <Chip label={tag.label}
                       component={Link}
                       href={'/news/tag/[tag]'}
                       as={'/news/tag/' + tag.slug}
