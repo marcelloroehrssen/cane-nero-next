@@ -11,6 +11,7 @@ import TagList from "../form/TagList";
 import Grid from "@material-ui/core/Grid";
 import FlashBarContext from "../../provider/FlashBarContext";
 import PreviewImage from "../form/PreviewImage";
+import {Theme as theme} from "@material-ui/core/styles/createMuiTheme";
 
 export default function NewsForm(props)
 {
@@ -30,7 +31,7 @@ export default function NewsForm(props)
     const submit = () => {
         handlerSubmit((response, isInsert) => {
             props.onSuccess(response.news[0], isInsert);
-            flashContext.show('Articolo' + (isInsert ? ' creato ' : ' aggiornato ') + 'con successo', 'success');
+            flashContext.show('Articolo' + (isInsert ? ' creato ' : ' aggiornato ') + 'con successo, sarà stabilmente visibile entro 30 minuti', 'success');
         })
     };
 
@@ -57,7 +58,7 @@ export default function NewsForm(props)
                 onChange={event => {handlerValue('text', event)}}
                 fullWidth
             />
-            <Divider className={classes.facebookLogin}/>
+            <Divider style={{marginTop: theme.spacing(2)}}/>
             <Grid container justify="center" alignItems="stretch" spacing={2}>
                 <Grid item container md={2} xs={12}>
                     <PreviewImage image={news.image} title={news.title} />
@@ -89,7 +90,7 @@ export default function NewsForm(props)
                     </Grid>
                 </Grid>
             </Grid>
-            <Divider className={classes.facebookLogin}/>
+            <Divider style={{marginTop: theme.spacing(2)}}/>
             <FormControl fullWidth>
                 <Button color="secondary" variant={'outlined'} disabled={false} onClick={submit}>Crea Articolo</Button>
             </FormControl>

@@ -9,6 +9,7 @@ import FlashBarContext from '../../provider/FlashBarContext'
 import UserContext from '../../provider/UserContext'
 import PropTypes from 'prop-types'
 import useForm from "../../hooks/useForm";
+import {Theme as theme} from "@material-ui/core/styles/createMuiTheme";
 
 LoginForm.propTypes = {
   onSubmitSuccess: PropTypes.func.isRequired,
@@ -57,8 +58,8 @@ export default function LoginForm (props) {
         showPassword={false}
         fullWidth
       />
-      <Divider className={classes.facebookLogin}/>
-      <FormControl fullWidth className={classes.facebookLogin}>
+      <Divider style={{marginTop: theme.spacing(2)}}/>
+      <FormControl fullWidth style={{marginTop: theme.spacing(2)}}>
         <Button color="secondary" variant={'outlined'} onClick={submit} type={'submit'}>Login</Button>
       </FormControl>
     </>

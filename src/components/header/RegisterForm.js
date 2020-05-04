@@ -12,6 +12,7 @@ import FlashBarContext from '../../provider/FlashBarContext'
 import PropTypes from 'prop-types'
 import useForm from "../../hooks/useForm";
 import useUnicityCheck from "../../hooks/useUnicityCheck";
+import {Theme as theme} from "@material-ui/core/styles/createMuiTheme";
 
 RegisterForm.propTypes = {
     onSubmitSuccess: PropTypes.func.isRequired,
@@ -183,8 +184,8 @@ export default function RegisterForm(props) {
             {/*>*/}
             {/*    Fai il login tramite Facebook*/}
             {/*</Button>*/}
-            <Divider className={classes.facebookLogin}/>
-            <FormControl fullWidth className={classes.facebookLogin}>
+            <Divider style={{marginTop: theme.spacing(2)}}/>
+            <FormControl fullWidth style={{marginTop: theme.spacing(2)}}>
                 <Button color={props.color || "secondary"} variant={'outlined'} onClick={submit}>{props.label || 'Iscriviti'}</Button>
             </FormControl>
         </>

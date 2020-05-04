@@ -93,7 +93,7 @@ export default function NewsListPage(props) {
         await deleteFunction(
             '/news', deleteSubject.id,
             'News cancellata con successo',
-            'C\'è stato un errore durante la cancellazione della news'
+            'C\'è stato un errore durante la cancellazione della news, l\'operazione sarà effettiva entro 30 minuti'
         );
         mutate(news);
     };

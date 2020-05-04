@@ -124,7 +124,7 @@ const Calendar = ({events, chronicles}) => {
     const removeEvent = async eventToRemove => {
         await deleteFunction(
             '/event', eventToRemove.id,
-            'Evento cancellato con successo',
+            'Evento cancellato con successo, l\'operazione sarà effettiva entro 30 minuti',
             'C\'è stato un errore durante la cancellazione dell\'evento'
         );
         localMutate([...data]);

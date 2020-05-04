@@ -11,6 +11,7 @@ import ItemSelect from '../form/Select'
 import FlashBarContext from '../../provider/FlashBarContext'
 import PropTypes from 'prop-types'
 import useForm from "../../hooks/useForm";
+import {Theme as theme} from "@material-ui/core/styles/createMuiTheme";
 
 const NewEventForm = ({addEvent, onSubmitSuccess, chronicles}) => {
   const flashContext = useContext(FlashBarContext);
@@ -29,7 +30,7 @@ const NewEventForm = ({addEvent, onSubmitSuccess, chronicles}) => {
     handlerSubmit((response) => {
       addEvent(response.events[0]);
       onSubmitSuccess();
-      flashContext.show('Evento creato con successo', 'success');
+      flashContext.show('Evento creato con successo, sarà stabilmente visibile entro 30 minuti', 'success');
     })
   };
 
@@ -80,7 +81,7 @@ const NewEventForm = ({addEvent, onSubmitSuccess, chronicles}) => {
           required
           fullWidth
         />
-        <Divider className={classes.facebookLogin}/>
+        <Divider style={{marginTop: theme.spacing(2)}}/>
         <FormControl fullWidth>
           <Button color="secondary" variant={'outlined'} onClick={submit}>Crea evento</Button>
         </FormControl>
