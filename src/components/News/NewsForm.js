@@ -11,7 +11,7 @@ import TagList from "../form/TagList";
 import Grid from "@material-ui/core/Grid";
 import FlashBarContext from "../../provider/FlashBarContext";
 import PreviewImage from "../form/PreviewImage";
-import {Theme as theme} from "@material-ui/core/styles/createMuiTheme";
+import {theme} from "../../Theme";
 
 export default function NewsForm(props)
 {

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import { useStyles } from './LoginRegisterStyle'
 import Password from '../form/Password'
 import Text from '../form/Text'
@@ -9,7 +9,7 @@ import FlashBarContext from '../../provider/FlashBarContext'
 import UserContext from '../../provider/UserContext'
 import PropTypes from 'prop-types'
 import useForm from "../../hooks/useForm";
-import {Theme as theme} from "@material-ui/core/styles/createMuiTheme";
+import {theme} from "../../Theme";
 
 LoginForm.propTypes = {
   onSubmitSuccess: PropTypes.func.isRequired,

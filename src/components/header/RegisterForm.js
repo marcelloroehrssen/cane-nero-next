@@ -12,7 +12,7 @@ import FlashBarContext from '../../provider/FlashBarContext'
 import PropTypes from 'prop-types'
 import useForm from "../../hooks/useForm";
 import useUnicityCheck from "../../hooks/useUnicityCheck";
-import {Theme as theme} from "@material-ui/core/styles/createMuiTheme";
+import {theme} from "../../Theme";
 
 RegisterForm.propTypes = {
     onSubmitSuccess: PropTypes.func.isRequired,

@@ -11,7 +11,7 @@ import ItemSelect from '../form/Select'
 import FlashBarContext from '../../provider/FlashBarContext'
 import PropTypes from 'prop-types'
 import useForm from "../../hooks/useForm";
-import {Theme as theme} from "@material-ui/core/styles/createMuiTheme";
+import {theme} from "../../Theme";
 
 const NewEventForm = ({addEvent, onSubmitSuccess, chronicles}) => {
   const flashContext = useContext(FlashBarContext);
