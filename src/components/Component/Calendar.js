@@ -22,6 +22,15 @@ import PropTypes from 'prop-types'
 import useDelete from "../../hooks/useDelete";
 import useSWR, {mutate} from "swr";
 import remote from "../../Utils/Remote";
+import SpeedDial from "@material-ui/lab/SpeedDial";
+import SpeedDialIcon from "@material-ui/lab/SpeedDialIcon";
+import EditIcon from "@material-ui/icons/Edit";
+import makeStyles from "@material-ui/core/styles/makeStyles";
+import SpeedDialAction from "@material-ui/lab/SpeedDialAction";
+import DateRangeIcon from '@material-ui/icons/DateRange';
+import DeleteIcon from "@material-ui/icons/Delete";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import {theme} from "../../Theme";
 
 const CalendarControlButton = ({tooltip, onClick, children}) => (
     <Typography variant="button" component="div" align={'center'}>
@@ -39,16 +48,70 @@ CalendarControlButton.propTypes = {
     children: PropTypes.node.isRequired
 };
 
+const useStyles = makeStyles((theme) => ({
+    root: {
+        height: 380,
+        transform: 'translateZ(0px)',
+        flexGrow: 1,
+    },
+    speedDial: {
+        position: 'fixed',
+        bottom: theme.spacing(2),
+        right: theme.spacing(2),
+    },
+}));
 
 const Calendar = ({events, chronicles}) => {
     const [newEventDialogOpen, setNewEventDialogOpen] = useState(false);
     const [month, setMonth] = useState(new Date().getMonth());
     const deleteFunction = useDelete();
+    const [openSpeedDial, setOpenSpeedDial] = useState(false);
+    const [showDelete, setShowDelete] = useState(false);
     const {data, mutate: localMutate} = useSWR(
         ['/event', month],
         (url, month) => remote(url, {get: {filter: JSON.stringify({month: (month + 1) % 13})}}).then(d => d.events),
         {initialData: events}
     );
+    const classes = useStyles();
+
+    const actions = [
+        {
+            icon: <AddBoxIcon color={"secondary"}/>,
+            name: 'Nuovo',
+            style: {backgroundColor: "#188038"},
+            activeAction: 'new',
+            callback: () => setNewEventDialogOpen(true)
+        },
+        {
+            icon: <DateRangeIcon color={"secondary"}/>,
+            name: 'Tutti',
+            style: {backgroundColor: "#1a73e8"},
+            activeAction: 'new',
+            callback: () => window.location.href = '/incoming-events'
+        },
+        {
+            icon: <DeleteIcon color={"secondary"}/>,
+            name: 'Cancella',
+            style: {backgroundColor: "#ff0000"},
+            activeAction: 'delete',
+            callback: () => setShowDelete(!showDelete)
+        },
+        {
+            icon: <ExitToAppIcon color={"secondary"}/>,
+            name: 'Esci',
+            style: {backgroundColor: theme.palette.primary.dark},
+            activeAction: 'exit',
+            callback: () => {}
+        },
+    ];
+
+    const handleOpen = () => setOpenSpeedDial(true);
+    const handleClose = action => () => {
+        setOpenSpeedDial(false);
+        if (action) {
+            action.callback();
+        }
+    }
 
     const updateMonth = async month => {
         const {events} = await remote('/event', {
@@ -87,13 +150,6 @@ const Calendar = ({events, chronicles}) => {
                 <Grid item xs={8}>
                     <Typography gutterBottom variant="h4" component="h4" align={'center'}>
                         {moment().month(month).locale('it').format('MMMM')}
-                        <RoleCheck role={'ROLE_ADMIN'}>
-                            <Tooltip title={'Crea un nuovo evento'} arrow>
-                                <IconButton onClick={() => setNewEventDialogOpen(true)}>
-                                    <AddBoxIcon color={'primary'}/>
-                                </IconButton>
-                            </Tooltip>
-                        </RoleCheck>
                     </Typography>
                 </Grid>
                 <Grid item xs={1}>
@@ -121,7 +177,7 @@ const Calendar = ({events, chronicles}) => {
                         data.map(event => {
                             return (
                                 <Grid key={event.id} item xs={12} md={4}>
-                                    <Event event={event} onDelete={removeEvent}/>
+                                    <Event event={event} showDelete={showDelete} onDelete={removeEvent}/>
                                 </Grid>
                             )
                         })
@@ -143,6 +199,35 @@ const Calendar = ({events, chronicles}) => {
                     <Button onClick={() => setNewEventDialogOpen(false)} color="secondary">Chiudi</Button>
                 </DialogActions>
             </Dialog>
+            <RoleCheck role={'ROLE_ADMIN'}>
+                <SpeedDial
+                    size="medium"
+                    aria-label="Azioni"
+                    component={SpeedDial}
+                    ariaLabel="SpeedDial openIcon example"
+                    className={classes.speedDial}
+                    FabProps={{
+                        style: {backgroundColor: "#188038"}
+                    }}
+                    icon={<SpeedDialIcon openIcon={<EditIcon/>}/>}
+                    onClose={handleClose}
+                    onOpen={handleOpen}
+                    open={openSpeedDial}
+                >
+                    {
+                        actions.map((action) => (
+                            <SpeedDialAction
+                                key={action.name}
+                                FabProps={{style: action.style}}
+                                icon={action.icon}
+                                tooltipTitle={action.name}
+                                onClick={handleClose(action)}
+                                tooltipOpen
+                                title={action.name}/>
+                        ))
+                    }
+                </SpeedDial>
+            </RoleCheck>
         </>
     )
 };

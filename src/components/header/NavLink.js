@@ -9,6 +9,7 @@ import MenuBookIcon from '@material-ui/icons/MenuBook'
 import WorkIcon from '@material-ui/icons/Work'
 import Divider from '@material-ui/core/Divider'
 import PropTypes from 'prop-types'
+import LoginRegister from "./LoginRegister";
 
 const options = {
   menuLink: [
@@ -38,39 +39,30 @@ export default function NavLink (props) {
     )
   }
 
-  const headerLink = (item) => {
-    if (!show) {
-      return <></>
-    }
-
-    return (
-      <Typography align={'center'}>
-        <Link href={item.url} variant="body2"
-          color="inherit">{item.label}</Link>
-      </Typography>
-    )
-  }
-
   if (props.anchor === 'header') {
     return (
-      <Grid container item xs={12} md={6} direction={'row'} justify="flex-end" alignItems="center"
-        component={'nav'}>
+        <Grid container item md={6} xs={2} direction="row" justify="flex-end" alignItems="center" component={'nav'} spacing={8}>
         {
-          options.menuLink.map((item) => {
+          show && options.menuLink.map((item) => {
             return (
-              <Grid key={item.key} item xs={12} md={2}>
-                {headerLink(item)}
+              <Grid key={item.key} item>
+                <Typography align={'center'}>
+                  <Link href={item.url} variant="body2"
+                        color="inherit">{item.label}</Link>
+                </Typography>
               </Grid>
             )
           })
         }
+        <Grid item>
+          <LoginRegister />
+        </Grid>
       </Grid>
     )
   } else {
     return (
       <>
         {options.menuLink.map((item) => sideLink(item))}
-        <Divider />
       </>
     )
   }

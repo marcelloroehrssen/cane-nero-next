@@ -55,7 +55,8 @@ export default function Event(props) {
                 <Typography variant="body2" component="p">
                     {"l'evento si terrà "}
                     <Tooltip title={moment(props.event.date).locale('it').format('dddd, DD MMMM YYYY')} arrow>
-                       <a href="#" style={{color:theme.palette.secondary.main}}>{moment(props.event.date).locale('it').fromNow()}</a>
+                        <a href="#"
+                           style={{color: theme.palette.secondary.main}}>{moment(props.event.date).locale('it').fromNow()}</a>
                     </Tooltip>
                 </Typography>
                 <Typography variant="body2" component="p">
@@ -71,7 +72,7 @@ export default function Event(props) {
                     </Grid>
                     <Grid>
                         <Link href={'/news/author/[author]'} as={'/news/author/' + props.event.creator.username}>
-                            <a style={{color:theme.palette.secondary.contrastText}}>
+                            <a style={{color: theme.palette.secondary.contrastText}}>
                                 {props.event.creator.firstName} {props.event.creator.lastName}
                             </a>
                         </Link>
@@ -79,19 +80,23 @@ export default function Event(props) {
                 </Grid>
             </CardContent>
             <RoleCheck role={'ROLE_ADMIN'}>
-                <CardActions>
-                    <Tooltip title={'Elimina questo evento'} arrow>
-                        <IconButton onClick={onDelete}>
-                            <DeleteIcon color={'secondary'}/>
-                        </IconButton>
-                    </Tooltip>
-                </CardActions>
+                {
+                    props.showDelete && <CardActions>
+                        <Tooltip title={'Elimina questo evento'} arrow>
+                            <IconButton onClick={onDelete}>
+                                <DeleteIcon color={'secondary'}/>
+                            </IconButton>
+                        </Tooltip>
+                    </CardActions>
+                }
             </RoleCheck>
             <Alert
                 open={alertShow}
                 title={'Sei sicuro?'}
                 text={"Sei sicuro di voler eliminare questo evento? L'operazione sarà irreversibile"}
-                onConfirm={() => {props.onDelete(props.event)}}
+                onConfirm={() => {
+                    props.onDelete(props.event)
+                }}
                 onCancel={onCancel}/>
         </Card>
     )

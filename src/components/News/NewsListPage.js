@@ -162,7 +162,7 @@ export default function NewsListPage(props) {
         <>
             <Grid container spacing={2} alignItems="stretch" direction="row" justify="center">
                 <Grid item xs={12} md={2}>
-                    <List component="nav">
+                    <List component="nav" >
                         <ListItem>Argomenti interessanti</ListItem>
                         {
                             tags.map((tag) => (
@@ -208,7 +208,7 @@ export default function NewsListPage(props) {
                     size="medium"
                     aria-label="Azioni"
                     component={SpeedDial}
-                    ariaLabel="SpeedDial openIcon example"
+                    ariaLabel="Azioni veloci"
                     className={classes.speedDial}
                     FabProps={{
                         style: {backgroundColor: "#188038"}

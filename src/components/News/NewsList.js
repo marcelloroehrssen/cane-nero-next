@@ -16,6 +16,7 @@ import useSWR, {mutate} from "swr";
 import remote from "../../Utils/Remote";
 import NextLink from "next/link";
 import MuiLink from "@material-ui/core/Link";
+import {useMediaQuery} from "@material-ui/core";
 
 NewsList.propTypes = {
     title: PropTypes.string.isRequired
@@ -35,6 +36,7 @@ export default function NewsList({title, news, filters}) {
         {initialData: news}
     );
     const [search, setSearch] = useState(filters);
+    const match = useMediaQuery(theme => theme.breakpoints.up('sm'))
 
     const loadMore = async () => {
         setSearch({
@@ -46,6 +48,8 @@ export default function NewsList({title, news, filters}) {
         const {news} = await remote('/news', {get:search});
         mutate(['/news', filters], news, false)
     };
+
+    const TileColMatcher = (index, isFull) => isFull ? ((index % 3) === 0 ? 12 : 6) : 12;
 
     return (
         <Section className={''} title={title}>
@@ -59,7 +63,7 @@ export default function NewsList({title, news, filters}) {
                                     component={'article'}
                                     className={'news-container'}
                                     style={{cursor: "pointer"}}
-                                    cols={(index % 3) === 0 ? 12 : 6}
+                                    cols={TileColMatcher(index, match)}
                                     onClick={() => window.location.href='/news/' + news.id + '/' + news.title}
                                 >
                                     <img src={news.image} alt={news.title}/>

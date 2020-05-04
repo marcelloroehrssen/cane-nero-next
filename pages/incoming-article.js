@@ -63,7 +63,7 @@ const IncomingArticle = ({initialData, tags}) => {
                     <LengthCheck obj={news} op={'gt'} min={0} msg={<Grid item xs={12} md={5}><em>Non ci sono news in coda</em></Grid>}>
                         {
                             news.map(n => (
-                                    <Grid key={n.id} xs={4} item>
+                                    <Grid key={n.id} xs={12} md={4}item>
                                         <NewsCard news={n} activeAction={actions} small/>
                                     </Grid>
                                 )
