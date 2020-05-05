@@ -13,7 +13,6 @@ import MeetingRoomIcon from '@material-ui/icons/MeetingRoom'
 import InfoIcon from '@material-ui/icons/Info';
 import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
 import UserContext from '../../provider/UserContext'
-import LoginRegister from './LoginRegister'
 import Drawer from '@material-ui/core/Drawer'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
@@ -24,6 +23,7 @@ import useMediaQuery from '@material-ui/core/useMediaQuery'
 import NavLink from './NavLink'
 import Badge from "@material-ui/core/Badge";
 import Link from "@material-ui/core/Link";
+import NextLink from "next/link";
 import RoleCheck from "../RoleCheck";
 import EventAvailableIcon from '@material-ui/icons/EventAvailable';
 
@@ -69,9 +69,11 @@ export default function LoggedIn() {
                                             </Avatar>
                                         </Grid>
                                         <Grid item>
-                                            <Link href={"/il-tuo-profilo"} color={"secondary"}>
-                                                {userContext.user.firstName} {userContext.user.lastName}
-                                            </Link>
+                                            <NextLink href={"/il-tuo-profilo"} passHref prefetch>
+                                                <Link color={"secondary"}>
+                                                    {userContext.user.firstName} {userContext.user.lastName}
+                                                </Link>
+                                            </NextLink>
                                         </Grid>
                                     </Grid>
                                 </ListItem>
@@ -86,21 +88,25 @@ export default function LoggedIn() {
                                     <ListItemText primary="Amministrazione" fontSize="small"
                                                   style={{fontWeight: "bold"}}/>
                                 </ListItem>
-                                <ListItem button onClick={() => {
-                                    window.location.href = '/incoming-article'
-                                }}>
+                                <ListItem button>
                                     <ListItemIcon>
                                         <PlaylistAddIcon color="secondary"/>
                                     </ListItemIcon>
-                                    <ListItemText primary="Articoli pubblicati"/>
+                                    <NextLink href={'/incoming-article'} passHref prefetch>
+                                        <Link color={"secondary"} underline="none">
+                                            <ListItemText primary="Articoli pubblicati"/>
+                                        </Link>
+                                    </NextLink>
                                 </ListItem>
-                                <ListItem button onClick={() => {
-                                    window.location.href = '/incoming-events'
-                                }}>
+                                <ListItem button>
                                     <ListItemIcon>
                                         <EventAvailableIcon color="secondary"/>
                                     </ListItemIcon>
-                                    <ListItemText primary="Eventi pubblicati"/>
+                                    <NextLink href={"/incoming-events"} passHref prefetch>
+                                        <Link color={"secondary"} underline="none">
+                                            <ListItemText primary="Eventi pubblicati"/>
+                                        </Link>
+                                    </NextLink>
                                 </ListItem>
                                 <Divider/>
                             </RoleCheck>
@@ -110,32 +116,38 @@ export default function LoggedIn() {
                                 <ListItem>
                                     <ListItemText primary="Privato" fontSize="small" style={{fontWeight: "bold"}}/>
                                 </ListItem>
-                                <ListItem button onClick={() => {
-                                    window.location.href = '/il-tuo-profilo'
-                                }}>
+                                <ListItem button>
                                     <ListItemIcon>
                                         <AccountCircleIcon color="secondary"/>
                                     </ListItemIcon>
-                                    <ListItemText primary="Il tuo Profilo"/>
+                                    <NextLink href={"/il-tuo-profilo"} passHref prefetch>
+                                        <Link color={"secondary"}>
+                                            <ListItemText primary="Il tuo Profilo"/>
+                                        </Link>
+                                    </NextLink>
                                 </ListItem>
-                                <ListItem button onClick={() => {
-                                    window.location.href = '/i-tuoi-pagamenti'
-                                }}>
+                                <ListItem button>
                                     <ListItemIcon>
                                         <Badge color={"error"}
                                                badgeContent={userContext.user.hasProblem.payments ? 1 : 0}>
                                             <MonetizationOnIcon color="secondary"/>
                                         </Badge>
                                     </ListItemIcon>
-                                    <ListItemText primary="La tua Iscrizione"/>
+                                    <NextLink href={"/i-tuoi-pagamenti"} passHref prefetch>
+                                        <Link color={"secondary"}>
+                                            <ListItemText primary="La tua Iscrizione"/>
+                                        </Link>
+                                    </NextLink>
                                 </ListItem>
-                                <ListItem button onClick={() => {
-                                    window.location.href = '/privacy'
-                                }}>
+                                <ListItem button>
                                     <ListItemIcon>
                                         <InfoIcon color="secondary"/>
                                     </ListItemIcon>
-                                    <ListItemText primary="Privacy"/>
+                                    <NextLink href={"/privacy"} passHref prefetch>
+                                        <Link color={"secondary"}>
+                                            <ListItemText primary="Privacy"/>
+                                        </Link>
+                                    </NextLink>
                                 </ListItem>
                                 <Divider/>
                                 <ListItem button onClick={() => {
@@ -153,7 +165,4 @@ export default function LoggedIn() {
             </Drawer>
         </>
     )
-    // return (
-    //     matches && <LoginRegister/>
-    // )
 }

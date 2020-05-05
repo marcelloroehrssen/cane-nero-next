@@ -18,7 +18,7 @@ export const CustomBreakcrumbs = ({breadCrumbs}) => {
             separator="›"
             aria-label="breadcrumb">
             <Typography color="textSecondary">
-                Sei in: <Link color="inherit" href="/">Home</Link>
+                Sei in: <NextLink href="/" passHref><Link color="inherit">Home</Link></NextLink>
             </Typography>
             {
                 breadCrumbs.map(b => (
