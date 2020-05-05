@@ -31,13 +31,15 @@ export default function NavLink(props) {
 
     const sideLink = (item) => {
         return (
-            <ListItem button key={item.key} onClick={() => {
-                window.location = item.url
-            }}>
+            <ListItem key={item.key}>
                 <ListItemIcon>
                     {item.icon}
                 </ListItemIcon>
-                <ListItemText primary={item.label} fontSize="small"/>
+                <NextLink href={item.url} passHref>
+                    <Link color="secondary" underline="none">
+                        <ListItemText primary={item.label} fontSize="small"/>
+                    </Link>
+                </NextLink>
             </ListItem>
         )
     }
@@ -48,9 +50,11 @@ export default function NavLink(props) {
                 {
                     show && options.menuLink.map((item) => {
                         return (
-                            <Button className={"NavTopBarButton"} key={item.key} align={'center'} aria-controls={"menu-appbar"} style={{marginRight:theme.spacing(4)}}>
+                            <Button className={"NavTopBarButton"} key={item.key} align={'center'}
+                                    aria-controls={"menu-appbar"} style={{marginRight: theme.spacing(4)}}>
                                 <NextLink href={item.url} passHref>
-                                    <Link className={"NavTopBarLink"} variant="body2" color="inherit" underline={"none"}>{item.label}</Link>
+                                    <Link className={"NavTopBarLink"} variant="body2" color="inherit"
+                                          underline={"none"}>{item.label}</Link>
                                 </NextLink>
                             </Button>
                         )
