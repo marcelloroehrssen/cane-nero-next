@@ -8,7 +8,6 @@ import PropTypes from 'prop-types'
 import CookieBar from "./CookieBar";
 import {theme} from "../../Theme";
 import Link from "@material-ui/core/Link";
-import HomeIcon from '@material-ui/icons/Home';
 import Breadcrumbs from "@material-ui/core/Breadcrumbs";
 import Typography from "@material-ui/core/Typography";
 
@@ -18,7 +17,7 @@ export const CustomBreakcrumbs = ({breadCrumbs}) => {
             separator="›"
             aria-label="breadcrumb">
             <Typography color="textSecondary">
-                Tu sei in: <Link color="inherit" href="/">Home</Link>
+                Sei in: <Link color="inherit" href="/">Home</Link>
             </Typography>
             {
                 breadCrumbs.map(b => (

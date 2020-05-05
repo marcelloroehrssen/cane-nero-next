@@ -6,6 +6,7 @@ import LoggedIn from './LoggedIn'
 import NavLink from './NavLink'
 import {useTheme} from '@material-ui/core/styles'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
+import NextLink from "next/link"
 
 const options = {
     title: 'Cane nero'
@@ -30,9 +31,11 @@ export default function Header() {
             <AppBar position={'fixed'} id={id} style={styles}>
                 <Toolbar>
                     <LoggedIn edge="start"/>
-                    <Link href={'/'} title={'Cane Nero - GDR lazio'}>
-                        <img src={'/images/logo.jpg'} style={logoStyles} alt="Cane Nero - GDR lazio"/>
-                    </Link>
+                    <NextLink href={"/"} passHref>
+                        <Link title={'Cane Nero - GDR lazio'}>
+                            <img src={'/images/logo.jpg'} style={logoStyles} alt="Cane Nero - GDR lazio"/>
+                        </Link>
+                    </NextLink>
                     <Typography variant="h4" component="h1" display={'inline'} style={{flexGrow: 1}}>
                         {options.title}
                     </Typography>
