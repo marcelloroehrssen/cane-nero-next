@@ -79,17 +79,15 @@ export default function Event(props) {
                     </Grid>
                 </Grid>
             </CardContent>
-            <RoleCheck role={'ROLE_ADMIN'}>
-                {
-                    props.showDelete && <CardActions>
-                        <Tooltip title={'Elimina questo evento'} arrow>
-                            <IconButton onClick={onDelete}>
-                                <DeleteIcon color={'secondary'}/>
-                            </IconButton>
-                        </Tooltip>
-                    </CardActions>
-                }
-            </RoleCheck>
+            {
+                props.showDelete && <CardActions>
+                    <Tooltip title={'Elimina questo evento'} arrow>
+                        <IconButton onClick={onDelete}>
+                            <DeleteIcon color={'secondary'}/>
+                        </IconButton>
+                    </Tooltip>
+                </CardActions>
+            }
             <Alert
                 open={alertShow}
                 title={'Sei sicuro?'}

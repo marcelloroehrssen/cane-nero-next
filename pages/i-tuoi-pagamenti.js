@@ -6,7 +6,9 @@ import {LoginHash} from "../src/Utils/LoginHash";
 import {HasRole} from "../src/Utils/HasRole";
 
 const ITuoiPagamenti = ({payments, user, canEdit, hasError, users}) => (
-    <Base title={'I tuoi pagamenti'} image={'/images/home.jpg'}>
+    <Base title={'I tuoi pagamenti'} image={'/images/home.jpg'} breadCrumbs={[
+        {url:null, label:"I tuoi pagamenti"}
+    ]}>
         <PaymentPage payments={payments} user={user} canEdit={canEdit} hasError={hasError} users={users}/>
     </Base>
 );

@@ -3,10 +3,10 @@ import {Container, Grid, Link, Paper} from '@material-ui/core'
 import FooterBox from './FooterBox'
 import {theme} from '../../Theme'
 
-export default function Footer() {
+export default function Footer({style}) {
     return (
         <>
-            <Paper elevation={3} component={'footer'} style={{marginTop:theme.spacing(8)}} square>
+            <Paper elevation={3} component={'footer'} style={style} square>
                 <Container>
                     <Grid container direction="row" justify="flex-start" alignItems="center" spacing={10}
                           style={{paddingTop: theme.spacing(4),paddingBottom: theme.spacing(4)}}>

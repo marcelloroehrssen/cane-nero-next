@@ -14,7 +14,9 @@ const PrivacySection = ({title, children}) => (
 
 
 const Privacy = () => (
-    <Base title={"Privacy Policy"} image={'/images/home.jpg'}>
+    <Base title={"Privacy Policy"} image={'/images/home.jpg'} breadCrumbs={[
+        {url:null, label:"Privacy"}
+    ]}>
         <Section title={"Normativa sulla privacy"}>
             <PrivacySection title={"A. Introduzione"}>
                 <ol>

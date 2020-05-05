@@ -21,7 +21,10 @@ const Tag = ({filters, pagination, tags, news, title}) => {
     }
 
     return (
-        <Base title={'Le ultime notizie su ' + title} image={'/images/home.jpg'}>
+        <Base title={'Le ultime notizie su ' + title} image={'/images/home.jpg'} breadCrumbs={[
+            {url:"/news", label:"news"},
+            {url:null, label:title},
+        ]}>
             <Section title={'Le ultime notizie su ' + title}>
                 <NewsListPage filters={filters}
                               pagination={pagination}

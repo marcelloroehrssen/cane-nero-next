@@ -4,7 +4,9 @@ import Section from "../src/components/layout/Section";
 import Typography from "@material-ui/core/Typography";
 
 const ChiSiamo = () => (
-    <Base title={"Chi siamo"} image={'/images/home.jpg'}>
+    <Base title={"Chi siamo"} image={'/images/home.jpg'} breadCrumbs={[
+        {url:null, label:"Chi siamo"}
+    ]}>
         <Section title={"Chi siamo"}>
             <Typography gutterBottom variant="body1" component="p">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et

@@ -19,7 +19,10 @@ const NewsDetailPage = ({news, tags, related}) => {
     }
 
     return (
-        <Base title={news.title} image={'/images/home.jpg'}>
+        <Base title={news.title} image={'/images/home.jpg'} breadCrumbs={[
+            {url:"/news", label:"news"},
+            {url:null, label:news.title},
+        ]}>
             <NewsBody news={news} tags={tags} related={related}/>
         </Base>
     );

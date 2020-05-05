@@ -5,7 +5,9 @@ import remote from "../src/Utils/Remote";
 import {LoginHash} from "../src/Utils/LoginHash";
 
 const IlTuoProfilo = ({user}) => (
-    <Base title={'Il tuo profilo '} image={'/images/home.jpg'}>
+    <Base title={'Il tuo profilo '} image={'/images/home.jpg'} breadCrumbs={[
+        {url:null, label:"Il tuo profilo"}
+    ]}>
         <UserPage user={user} />
     </Base>
 );

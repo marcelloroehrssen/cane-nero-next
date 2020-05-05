@@ -18,7 +18,13 @@ export function UserContextProvider(props) {
         const fetcher = async () => {
             const headers = cookies.login ? {headers: {'client-security-token': cookies.login}} : null;
             const {user} = await remote('/user', headers);
-            setState({user: {...user, isLogged: !!cookies.login}});
+
+            if (!user) {
+                removeCookie("login");
+                setState({user: {isLogged: false}});
+            } else {
+                setState({user: {...user, isLogged: !!cookies.login}});
+            }
         };
         fetcher();
     }, []);

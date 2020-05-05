@@ -6,7 +6,9 @@ import remote from "../src/Utils/Remote";
 import {config} from '../src/Config'
 
 const News = ({filters, pagination, tags, news}) => (
-    <Base title={'Le ultime notizie dal GDR'} image={'/images/home.jpg'}>
+    <Base title={'Le ultime notizie dal GDR'} image={'/images/home.jpg'} breadCrumbs={[
+        {url:null, label:"News"}
+    ]}>
         <Section title={'Le ultime notizie dal GDR'}>
             <NewsListPage filters={filters}
                           pagination={pagination}

@@ -21,7 +21,9 @@ const IncomingEvents = ({initialEvents}) => {
     };
 
     return (
-        <Base title="Eventi in programma" image={'/images/home.jpg'}>
+        <Base title="Eventi in programma" image={'/images/home.jpg'} breadCrumbs={[
+            {url:null, label:"Eventi pubblicati"}
+        ]}>
             <Section title="Eventi in programma">
                 {
                     initialEvents.map(
@@ -39,7 +41,7 @@ const IncomingEvents = ({initialEvents}) => {
                                             e.events.map(event => {
                                                 return (
                                                     <Grid key={event.id} item xs={12} md={4}>
-                                                        <Event event={event} onDelete={removeEvent}/>
+                                                        <Event event={event} onDelete={removeEvent} showDelete={true}/>
                                                     </Grid>
                                                 )
                                             })

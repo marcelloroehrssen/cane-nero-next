@@ -15,8 +15,8 @@ export default function Section (props) {
   const component = props.component ? props.component : 'h4';
 
   return (
-    <section style={{ marginTop: theme.spacing(8), color: theme.palette.primary.dark }}>
-      <Typography variant={variant} component={component} style={{ marginTop: theme.spacing(8), color: theme.palette.primary.dark }}>
+    <section style={{color: theme.palette.primary.dark }}>
+      <Typography variant={variant} component={component} style={{color: theme.palette.primary.dark }}>
         {props.title}
       </Typography>
       <hr style={{ borderColor: theme.palette.primary.dark }}/>

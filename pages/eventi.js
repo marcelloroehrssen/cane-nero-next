@@ -6,7 +6,9 @@ import remote from "../src/Utils/Remote";
 import {config} from "../src/Config";
 
 const Eventi = ({events, chronicles}) => (
-    <Base title={"Eventi di gioco di ruolo a Roma in programma"} image={'/images/home.jpg'}>
+    <Base title={"Eventi di gioco di ruolo a Roma in programma"} image={'/images/home.jpg'} breadCrumbs={[
+        {url:null, label:"Eventi"}
+    ]}>
         <Section title={"Eventi in programma"}>
             <Calendar events={events} chronicles={chronicles}/>
         </Section>

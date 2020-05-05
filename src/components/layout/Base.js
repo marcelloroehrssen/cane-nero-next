@@ -6,25 +6,56 @@ import Footer from '../footer/Footer'
 import Head from 'next/head'
 import PropTypes from 'prop-types'
 import CookieBar from "./CookieBar";
+import {theme} from "../../Theme";
+import Link from "@material-ui/core/Link";
+import HomeIcon from '@material-ui/icons/Home';
+import Breadcrumbs from "@material-ui/core/Breadcrumbs";
+import Typography from "@material-ui/core/Typography";
 
-const Base = ({children, title, image}) => (
+export const CustomBreakcrumbs = ({breadCrumbs}) => {
+    return (
+        <Breadcrumbs
+            separator="›"
+            aria-label="breadcrumb">
+            <Typography color="textSecondary">
+                Tu sei in: <Link color="inherit" href="/">Home</Link>
+            </Typography>
+            {
+                breadCrumbs.map(b => (
+                    <div key={b.url}>
+                        {b.url && <Link color="inherit" href={b.url}>{b.label}</Link>}
+                        {!b.url && <Typography color="textSecondary">{b.label}</Typography>}
+                    </div>
+                ))
+            }
+        </Breadcrumbs>
+    );
+}
+
+const Base = ({children, title, image, breadCrumbs}) => (
     <>
         <CssBaseline/>
         <Head>
             <title>Cane Nero - {title}</title>
         </Head>
-        <div style={{flexGrow: 1}}>
+        <div style={{flexGrow: 1,backgroundImage:"linear-gradient(90deg,#333333,rgb(189, 0, 0))"}}>
             <Header/>
             <div style={{
                 backgroundImage: 'url(' + image + ')',
                 backgroundPosition: "center center",
                 width: "100%",
                 height: 300,
+                borderBottomRightRadius:100
             }}/>
-            <Container>
-                {children}
+            <Container style={{paddingTop:theme.spacing(1), paddingBottom:theme.spacing(1)}}>
+                {breadCrumbs && <CustomBreakcrumbs breadCrumbs={breadCrumbs}/>}
             </Container>
-            <Footer/>
+            <div style={{boxShadow: "inset 0 0 10px black",backgroundColor:"rgba(153, 153, 153, 1)",borderRadius:100,paddingTop:theme.spacing(8), paddingBottom:theme.spacing(8)}}>
+                <Container>
+                    {children}
+                </Container>
+            </div>
+            <Footer style={{marginTop:theme.spacing(8),borderTopRightRadius:100}}/>
         </div>
         <CookieBar/>
     </>
@@ -32,7 +63,9 @@ const Base = ({children, title, image}) => (
 
 Base.propTypes = {
     children: PropTypes.node.isRequired,
-    title: PropTypes.string.isRequired
+    title: PropTypes.string.isRequired,
+    image: PropTypes.string,
+    breadCrumbs: PropTypes.array
 };
 
 export default Base;

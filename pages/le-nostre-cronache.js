@@ -7,7 +7,9 @@ import remote from "../src/Utils/Remote";
 import {config} from "../src/Config";
 
 const OurChronicle = ({chronicles}) => (
-    <Base title={"Le nostre cronache"} image={'/images/home.jpg'}>
+    <Base title={"Le nostre cronache"} image={'/images/home.jpg'} breadCrumbs={[
+        {url:null, label:"Le nostre cronache"}
+    ]}>
         <Section title={"Le nostre cronache"}>
             <Grid container spacing={2} alignItems="stretch" direction="row" justify="center">
                 {

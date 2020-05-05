@@ -57,7 +57,9 @@ const IncomingArticle = ({initialData, tags}) => {
     ];
 
     return (
-        <Base title={"Articoli di prossima pubblicazione"} image={'/images/home.jpg'}>
+        <Base title={"Articoli di prossima pubblicazione"} image={'/images/home.jpg'} breadCrumbs={[
+            {url:null, label:"Articoli pubblicati"}
+        ]}>
             <Section title={"Articoli pubblicati"} >
                 <Grid container spacing={2} alignItems="center" direction="row" justify="center">
                     <LengthCheck obj={news} op={'gt'} min={0} msg={<Grid item xs={12} md={5}><em>Non ci sono news in coda</em></Grid>}>
