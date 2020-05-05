@@ -10,6 +10,7 @@ import PropTypes from 'prop-types'
 import LoginRegister from "./LoginRegister";
 import Button from "@material-ui/core/Button";
 import {theme} from "../../Theme";
+import NextLink from "next/link";
 
 const options = {
     menuLink: [
@@ -48,7 +49,9 @@ export default function NavLink(props) {
                     show && options.menuLink.map((item) => {
                         return (
                             <Button className={"NavTopBarButton"} key={item.key} align={'center'} aria-controls={"menu-appbar"} style={{marginRight:theme.spacing(4)}}>
-                                <Link className={"NavTopBarLink"} href={item.url} variant="body2" color="inherit" underline={"none"}>{item.label}</Link>
+                                <NextLink href={item.url} passHref>
+                                    <Link className={"NavTopBarLink"} variant="body2" color="inherit" underline={"none"}>{item.label}</Link>
+                                </NextLink>
                             </Button>
                         )
                     })
