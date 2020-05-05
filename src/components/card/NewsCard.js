@@ -13,7 +13,8 @@ import {Tooltip} from "@material-ui/core";
 import CardHeader from "@material-ui/core/CardHeader";
 import Avatar from "@material-ui/core/Avatar";
 import Grid from "@material-ui/core/Grid";
-import Link from "next/link";
+import NextLink from "next/link";
+import Link from "@material-ui/core/Link";
 
 const ActionButton = ({action, news})  => {
     if (!action) {
@@ -39,10 +40,9 @@ const NewsCard = ({news, small, activeAction}) => (
                     </Avatar>
                 }
                 title={
-                    <Link href={'/news?author=' + news.author.username}
-                          as={'/news/author/' + news.author.username}>
-                        <a className={'MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-body2 MuiTypography-colorInherit'}>{news.author.firstName + ' ' + news.author.lastName}</a>
-                    </Link>
+                    <NextLink href={'/news?author=' + news.author.username} as={'/news/author/' + news.author.username} passHref>
+                        <Link color="secondary">{news.author.firstName + ' ' + news.author.lastName}</Link>
+                    </NextLink>
                 }
                 subheader={moment(news.date).locale('it').format('dddd, gg MMMM YYYY')}
             />
@@ -51,10 +51,10 @@ const NewsCard = ({news, small, activeAction}) => (
                 <Typography gutterBottom
                             variant="h5"
                             color={'secondary'}>
-                    <Link href={'/news/[news_id]/[news_title]'}
+                    <NextLink href={'/news/[news_id]/[news_title]'}
                           as={'/news/' + news.id + '/' + news.title}>
-                        <a className={'MuiTypography-root MuiLink-root MuiTypography-h4 MuiLink-underlineHover MuiTypography-body2 MuiTypography-colorInherit'}>{news.title}</a>
-                    </Link>
+                        <Link color="secondary">{news.title}</Link>
+                    </NextLink>
                 </Typography>
             </CardContent>
             <CardActions>
@@ -63,10 +63,11 @@ const NewsCard = ({news, small, activeAction}) => (
                         news.tags.map((tag) => {
                             return (
                                 <Grid item key={tag.id}>
-                                    <Link href={'/news/tag/[tag]'}
-                                          as={'/news/tag/' + tag.slug}>
-                                        <Chip label={tag.label} clickable/>
-                                    </Link>
+                                    <NextLink href={'/news/tag/[tag]'} as={'/news/tag/' + tag.slug}>
+                                        <Link underline="none">
+                                            <Chip label={tag.label} clickable/>
+                                        </Link>
+                                    </NextLink>
                                 </Grid>
                             );
                         })

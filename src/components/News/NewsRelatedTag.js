@@ -1,18 +1,18 @@
 import React from 'react'
 import Chip from '@material-ui/core/Chip'
-import Link from '../Link'
 import Grid from "@material-ui/core/Grid";
+import NextLink from "next/link"
+import Link from "@material-ui/core/Link";
 
 const NewsRelatedTag = ({tags}) => (
     <Grid container direction="row" justify="flex-start" alignItems="center" spacing={1}>
         {
             tags.map(tag => <Grid key={tag.id} item>
-                <Chip label={tag.label}
-                      component={Link}
-                      href={'/news/tag/[tag]'}
-                      as={'/news/tag/' + tag.slug}
-                      color={'primary'}
-                      clickable/>
+                <NextLink href={'/news/tag/[tag]'} as={'/news/tag/' + tag.slug} passHref>
+                    <Link underline="none">
+                        <Chip label={tag.label} color={'primary'} clickable/>
+                    </Link>
+                </NextLink>
             </Grid>)
         }
     </Grid>

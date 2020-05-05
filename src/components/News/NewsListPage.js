@@ -29,9 +29,10 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogActions from "@material-ui/core/DialogActions";
 import NewsForm from "./NewsForm";
 import remote from "../../Utils/Remote";
-import Link from 'next/link'
+import NextLink from 'next/link'
 import useSWR from "swr";
 import {config} from "../../Config";
+import Link from "@material-ui/core/Link";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -167,12 +168,16 @@ export default function NewsListPage(props) {
                         {
                             tags.map((tag) => (
                                     <ListItem key={tag.id}>
-                                        <Link href={tag.slug === props.filters.tags[0] ? '/news' : '/news/tag/[tag]'}
-                                              as={tag.slug === props.filters.tags[0] ? '/news' : '/news/tag/' + tag.slug}>
-                                            <Chip label={tag.label}
-                                                  color={tag.slug === props.filters.tags[0] ? 'secondary' : 'primary'}
-                                                  clickable/>
-                                        </Link>
+                                        <NextLink href={tag.slug === props.filters.tags[0] ? '/news' : '/news/tag/[tag]'}
+                                              as={tag.slug === props.filters.tags[0] ? '/news' : '/news/tag/' + tag.slug}
+                                              passHref
+                                        >
+                                            <Link underline="none">
+                                                <Chip label={tag.label}
+                                                      color={tag.slug === props.filters.tags[0] ? 'secondary' : 'primary'}
+                                                      clickable/>
+                                            </Link>
+                                        </NextLink>
                                     </ListItem>
                                 )
                             )

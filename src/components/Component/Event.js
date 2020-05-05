@@ -4,17 +4,17 @@ import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 import Typography from '@material-ui/core/Typography'
 import makeStyles from '@material-ui/core/styles/makeStyles'
-import Link from 'next/link'
+import NextLink from 'next/link'
 import Tooltip from '@material-ui/core/Tooltip'
 import IconButton from '@material-ui/core/IconButton'
 import CardActions from '@material-ui/core/CardActions'
 import DeleteIcon from '@material-ui/icons/Delete'
-import RoleCheck from '../RoleCheck'
 import Alert from './Alert'
 import PropTypes from 'prop-types'
 import Grid from "@material-ui/core/Grid";
 import {Avatar} from "@material-ui/core";
 import {theme} from "../../Theme";
+import Link from "@material-ui/core/Link";
 
 Event.propTypes = {
     event: PropTypes.object.isRequired,
@@ -71,11 +71,11 @@ export default function Event(props) {
                         </Avatar>
                     </Grid>
                     <Grid>
-                        <Link href={'/news/author/[author]'} as={'/news/author/' + props.event.creator.username}>
-                            <a style={{color: theme.palette.secondary.contrastText}}>
+                        <NextLink href={'/news/author/[author]'} as={'/news/author/' + props.event.creator.username} passHref>
+                            <Link color="secondary">
                                 {props.event.creator.firstName} {props.event.creator.lastName}
-                            </a>
-                        </Link>
+                            </Link>
+                        </NextLink>
                     </Grid>
                 </Grid>
             </CardContent>

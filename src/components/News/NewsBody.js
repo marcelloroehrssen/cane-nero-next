@@ -1,7 +1,7 @@
 import React from 'react'
 import Typography from '@material-ui/core/Typography'
-import Link from 'next/link'
-import MuiLink from '@material-ui/core/Link'
+import NextLink from 'next/link'
+import Link from '@material-ui/core/Link'
 import moment from 'moment'
 import Section from '../layout/Section'
 import {Avatar} from '@material-ui/core'
@@ -25,9 +25,9 @@ const NewsBody = ({news, tags, related}) => (
                     </Avatar>
                 </Grid>
                 <Grid>
-                    <Link href={'/news/author/[author]'} as={'/news/author/' + news.author.username} passHref>
-                        <MuiLink>{news.author.firstName} {news.author.lastName}</MuiLink>
-                    </Link>,
+                    <NextLink href={'/news/author/[author]'} as={'/news/author/' + news.author.username} passHref>
+                        <Link>{news.author.firstName} {news.author.lastName}</Link>
+                    </NextLink>,
                 </Grid>
                 <Grid>
                     {moment(news.date).locale('it').format('dddd, gg MMMM YYYY')}
