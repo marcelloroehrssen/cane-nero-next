@@ -14,6 +14,19 @@ body {
     font-family: 'long_shot', serif;
 }
 
+.MuiTypography-body2.NavTopBarLink {
+    font-family: 'long_shot', serif;
+    font-size: 1.43rem;
+    letter-spacing: .1em;
+}
+
+.MuiButtonBase-root.NavTopBarButton {
+    border:1px solid transparent;
+}
+.MuiButtonBase-root.NavTopBarButton:hover {
+    border:1px solid white;
+}
+
 .news_load_more span{
     transition: all .1s linear;
 }
