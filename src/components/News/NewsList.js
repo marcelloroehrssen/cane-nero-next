@@ -9,24 +9,17 @@ import GridListTile from '@material-ui/core/GridListTile'
 import GridListTileBar from '@material-ui/core/GridListTileBar'
 import InfoIcon from '@material-ui/icons/Info'
 import {config} from "../../Config";
-import Link from '../Link'
 import useTheme from '@material-ui/core/styles/useTheme'
 import PropTypes from 'prop-types'
 import useSWR, {mutate} from "swr";
 import remote from "../../Utils/Remote";
-import NextLink from "next/link";
-import MuiLink from "@material-ui/core/Link";
 import {useMediaQuery} from "@material-ui/core";
+import Link from "@material-ui/core/Link";
+import NextLink from "next/link";
 
 NewsList.propTypes = {
     title: PropTypes.string.isRequired
 };
-
-const NewsLink = ({href, as, title, ...props}) => (
-    <NextLink href={href} as={as} passHref>
-        <MuiLink {...props}>{title}</MuiLink>
-    </NextLink>
-);
 
 export default function NewsList({title, news, filters}) {
     const theme = useTheme();
@@ -69,7 +62,9 @@ export default function NewsList({title, news, filters}) {
                                     <img src={news.image} alt={news.title}/>
                                     <GridListTileBar
                                         title={
-                                            <Link href={'/news/[news_id]/[news_title]'} as={'/news/' + news.id + '/' + news.title} color={"secondary"}>{news.title}</Link>
+                                            <NextLink href={'/news/[news_id]/[news_title]'} as={'/news/' + news.id + '/' + news.title} passHref>
+                                                <Link color={"secondary"}>{news.title}</Link>
+                                            </NextLink>
                                         }
                                         actionIcon={
                                             <IconButton component={Link}
