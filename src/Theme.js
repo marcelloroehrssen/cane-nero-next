@@ -52,7 +52,8 @@ export const theme = createMuiTheme(
         overrides: {
             MuiPaper: {
                 root: {
-                    backgroundImage: "url(/images/dark-background.png)"
+                    backgroundImage: "url(/images/dark-background.png)",
+                    animation: "backgroundSlide 60s infinite"
                 }
             },
             MuiDrawer: {
