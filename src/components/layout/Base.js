@@ -38,7 +38,7 @@ const Base = ({children, title, image, breadCrumbs}) => (
         <Head>
             <title>Cane Nero - {title}</title>
         </Head>
-        <div style={{flexGrow: 1,backgroundImage:"linear-gradient(90deg,#333333,rgb(189, 0, 0))"}}>
+        <div className="main-bg">
             <Header/>
             <div style={{
                 backgroundImage: 'url(' + image + ')',

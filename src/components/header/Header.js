@@ -22,9 +22,9 @@ export default function Header() {
     });
 
     const bar = (id, position, logoStyles, options) => {
-        let styles = ''
+        let styles = {backgroundColor: 'black'};
         if (position === 'top') {
-            styles = {backgroundColor: 'transparent', boxShadow: 'none'}
+            styles = {backgroundImage:'none', backgroundColor: 'transparent', boxShadow: 'none'}
         }
 
         return (
