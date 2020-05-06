@@ -31,7 +31,7 @@ export default function NavLink(props) {
 
     const sideLink = (item) => {
         return (
-            <ListItem key={item.key}>
+            <ListItem button key={item.key}>
                 <ListItemIcon>
                     {item.icon}
                 </ListItemIcon>

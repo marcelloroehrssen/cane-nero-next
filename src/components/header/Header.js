@@ -51,11 +51,7 @@ export default function Header() {
                 {bar('back-to-top-anchor', 'top', {marginRight: theme.spacing(2), width: 100, height: 100}, options)}
             </Slide>
             <Slide in={trigger}>
-                {bar('back-to-top-anchor-fixed', 'fixed', {
-                    marginRight: theme.spacing(2),
-                    width: 30,
-                    height: 30
-                }, options)}
+                {bar('back-to-top-anchor-fixed', 'fixed', {}, options)}
             </Slide>
         </>
     )
