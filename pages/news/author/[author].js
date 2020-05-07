@@ -58,7 +58,7 @@ export async function getStaticProps({params}) {
             image: '/images/home.jpg',
             breadCrumbs: [
                 {url: "/news", label: "news"},
-                {url: null, label: title},
+                {url: null, label: params.author},
             ]
         }
     }
