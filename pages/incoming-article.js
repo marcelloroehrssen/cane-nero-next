@@ -57,15 +57,14 @@ const IncomingArticle = ({initialData, tags}) => {
     ];
 
     return (
-        <Base title={"Articoli di prossima pubblicazione"} image={'/images/home.jpg'} breadCrumbs={[
-            {url:null, label:"Articoli pubblicati"}
-        ]}>
-            <Section title={"Articoli pubblicati"} >
+        <Base>
+            <Section title={"Articoli pubblicati"}>
                 <Grid container spacing={2} alignItems="center" direction="row" justify="center">
-                    <LengthCheck obj={news} op={'gt'} min={0} msg={<Grid item xs={12} md={5}><em>Non ci sono news in coda</em></Grid>}>
+                    <LengthCheck obj={news} op={'gt'} min={0}
+                                 msg={<Grid item xs={12} md={5}><em>Non ci sono news in coda</em></Grid>}>
                         {
                             news.map(n => (
-                                    <Grid key={n.id} xs={12} md={4}item>
+                                    <Grid key={n.id} xs={12} md={4} item>
                                         <NewsCard news={n} activeAction={actions} small/>
                                     </Grid>
                                 )
@@ -104,11 +103,19 @@ const IncomingArticle = ({initialData, tags}) => {
 
 export async function getServerSideProps({req, res}) {
 
-    const {news} = await remote('/news', {headers:{'client-security-token':LoginHash(req)}});
+    const {news} = await remote('/news', {headers: {'client-security-token': LoginHash(req)}});
     const {tags} = await remote('/tag');
 
     return {
-        props: {initialData:news, tags},
+        props: {
+            initialData: news,
+            tags,
+            title: "Articoli di prossima pubblicazione",
+            image: '/images/home.jpg',
+            breadCrumbs: [
+                {url: null, label: "Articoli pubblicati"}
+            ]
+        },
     }
 }
 

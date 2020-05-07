@@ -14,9 +14,7 @@ const PrivacySection = ({title, children}) => (
 
 
 const Privacy = () => (
-    <Base title={"Privacy Policy"} image={'/images/home.jpg'} breadCrumbs={[
-        {url:null, label:"Privacy"}
-    ]}>
+    <Base>
         <Section title={"Normativa sulla privacy"}>
             <PrivacySection title={"A. Introduzione"}>
                 <ol>
@@ -282,5 +280,17 @@ const Privacy = () => (
         </Section>
     </Base>
 );
+
+export async function getServerSideProps({req, res}) {
+    return {
+        props: {
+            title: "Privacy Policy",
+            image: '/images/home.jpg',
+            breadCrumbs: [
+                {url: null, label: "Privacy"}
+            ]
+        }
+    };
+}
 
 export default Privacy;

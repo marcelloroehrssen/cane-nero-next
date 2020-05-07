@@ -21,9 +21,7 @@ const IncomingEvents = ({initialEvents}) => {
     };
 
     return (
-        <Base title="Eventi in programma" image={'/images/home.jpg'} breadCrumbs={[
-            {url:null, label:"Eventi pubblicati"}
-        ]}>
+        <Base>
             <Section title="Eventi in programma">
                 {
                     initialEvents.map(
@@ -57,12 +55,11 @@ const IncomingEvents = ({initialEvents}) => {
     );
 };
 
-export async function getServerSideProps({req, res})
-{
+export async function getServerSideProps({req, res}) {
     let initialEvents = [];
 
     for (let i = 0; i < 12; i++) {
-        const {events} = await remote('/event', {get: {filter:JSON.stringify({month: i + 1})}});
+        const {events} = await remote('/event', {get: {filter: JSON.stringify({month: i + 1})}});
         initialEvents.push({
             month: moment(new Date().setMonth(i)).locale('it').format('MMMM'),
             events
@@ -70,7 +67,14 @@ export async function getServerSideProps({req, res})
     }
 
     return {
-        props: {initialEvents},
+        props: {
+            initialEvents,
+            title: "Eventi in programma",
+            image: '/images/home.jpg',
+            breadCrumbs: [
+                {url: null, label: "Eventi pubblicati"}
+            ]
+        },
     }
 }
 

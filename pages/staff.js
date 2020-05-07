@@ -5,9 +5,7 @@ import StaffCard from "../src/components/card/StaffCard";
 import Grid from "@material-ui/core/Grid";
 
 const Index = () => (
-    <Base title={"Chi Siamo"} image={'/images/home.jpg'} breadCrumbs={[
-        {url:null, label:"Staff"}
-    ]}>
+    <Base>
         <Section title={"Chi Siamo"}>
             <Grid container spacing={2} alignItems="stretch" direction="row" justify="center">
                 <Grid item xs={12} md={4}>
@@ -79,5 +77,17 @@ const Index = () => (
         </Section>
     </Base>
 );
+
+export async function getStaticProps() {
+    return {
+        props: {
+            title: "Staff",
+            image: '/images/home.jpg',
+            breadCrumbs: [
+                {url: null, label: "Staff"}
+            ]
+        }
+    }
+}
 
 export default Index;

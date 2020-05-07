@@ -5,7 +5,7 @@ import remote from "../src/Utils/Remote";
 import {config} from "../src/Config";
 
 const Index = ({news, filters}) => (
-    <Base title={"Homepage"} image={'/images/home.jpg'}>
+    <Base>
         <NewsList title={"In Evidenza"} news={news} filters={filters}/>
     </Base>
 );
@@ -20,7 +20,7 @@ export async function getStaticProps() {
 
     return {
         revalidate: config.page.index.revalidate,
-        props: {news, filters:get}
+        props: {news, filters:get, title:"Homepage", image:'/images/home.jpg'}
     }
 }
 

@@ -76,6 +76,7 @@ body {
     /*background-image: url("/images/dark-background.png"), linear-gradient(90deg, #333333, rgb(189, 0, 0))*/
     background-image: url("/images/dark-background.png"), linear-gradient(90deg, #000000, rgb(189, 0, 0));
     animation: backgroundSlide 60s infinite;
+    overflow-x: hidden;
 }
 
 footer {
@@ -99,4 +100,20 @@ footer {
     100% {
         background-position: 0 0;
     }
+}
+
+.page-transition-enter {
+    transform: scale(.9) translateX(150%);
+    filter: blur(2px);
+}
+.page-transition-enter-active {
+    transform: scale(1) translateX(0);
+    transition: transform 150ms, filter 150ms 150ms;
+}
+.page-transition-exit {
+    transform: scale(1) translateX(0);
+}
+.page-transition-exit-active {
+    transform: scale(.9) translateX(-150%);
+    transition: filter 150ms, transform 150ms 150ms;
 }

@@ -6,9 +6,7 @@ import {LoginHash} from "../src/Utils/LoginHash";
 import {HasRole} from "../src/Utils/HasRole";
 
 const ITuoiPagamenti = ({payments, user, canEdit, hasError, users}) => (
-    <Base title={'I tuoi pagamenti'} image={'/images/home.jpg'} breadCrumbs={[
-        {url:null, label:"I tuoi pagamenti"}
-    ]}>
+    <Base>
         <PaymentPage payments={payments} user={user} canEdit={canEdit} hasError={hasError} users={users}/>
     </Base>
 );
@@ -33,14 +31,25 @@ export async function getServerSideProps({req, res}) {
             '/user',
             {
                 headers: {'client-security-token': login},
-                get: {filter:JSON.stringify({field:"all",value:"0"})}
+                get: {filter: JSON.stringify({field: "all", value: "0"})}
             }
         );
         users = remoteUsers;
     }
 
     return {
-        props: {payments, user, canEdit, hasError, users},
+        props: {
+            payments,
+            user,
+            canEdit,
+            hasError,
+            users,
+            title: 'I tuoi pagamenti',
+            image: '/images/home.jpg',
+            breadCrumbs: [
+                {url: null, label: "I tuoi pagamenti"}
+            ]
+        },
     }
 }
 

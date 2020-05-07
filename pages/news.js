@@ -6,10 +6,8 @@ import remote from "../src/Utils/Remote";
 import {config} from '../src/Config'
 
 const News = ({filters, pagination, tags, news}) => (
-    <Base title={'Le ultime notizie dal GDR'} image={'/images/home.jpg'} breadCrumbs={[
-        {url:null, label:"News"}
-    ]}>
-        <Section title={'Le ultime notizie dal GDR'}>
+    <Base>
+        <Section>
             <NewsListPage filters={filters}
                           pagination={pagination}
                           news={news}
@@ -36,7 +34,16 @@ export async function getStaticProps({params}) {
 
     return {
         revalidate: config.page.news.revalidate,
-        props: {filters, pagination, tags, news}
+        props: {
+            filters,
+            pagination,
+            tags, news,
+            title: 'Le ultime notizie dal GDR',
+            image: '/images/home.jpg',
+            breadCrumbs: [
+                {url: null, label: "News"}
+            ]
+        }
     }
 }
 

@@ -4,9 +4,7 @@ import Section from "../src/components/layout/Section";
 import Typography from "@material-ui/core/Typography";
 
 const ChiSiamo = () => (
-    <Base title={"Chi siamo"} image={'/images/home.jpg'} breadCrumbs={[
-        {url:null, label:"Chi siamo"}
-    ]}>
+    <Base>
         <Section title={"Chi siamo"}>
             <Typography gutterBottom variant="body1" component="p">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
@@ -49,5 +47,17 @@ const ChiSiamo = () => (
         </Section>
     </Base>
 );
+
+export async function getStaticProps() {
+    return {
+        props: {
+            title: "Chi siamo",
+            image: '/images/home.jpg',
+            breadCrumbs: [
+                {url: null, label: "Chi siamo"}
+            ]
+        }
+    }
+}
 
 export default ChiSiamo;

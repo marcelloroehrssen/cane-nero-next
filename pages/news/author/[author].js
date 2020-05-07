@@ -15,16 +15,13 @@ const Author = ({filters, pagination, tags, news, title}) => {
     if (router.isFallback) {
         return (
             <Backdrop open={true}>
-                <CircularProgress color="inherit" />
+                <CircularProgress color="inherit"/>
             </Backdrop>
         );
     }
 
     return (
-        <Base title={'Le ultime notizie di ' + title} image={'/images/home.jpg'} breadCrumbs={[
-            {url:"/news", label:"news"},
-            {url:null, label:title},
-        ]}>
+        <Base>
             <Section title={'Le ultime notizie di ' + title}>
                 <NewsListPage filters={filters}
                               pagination={pagination}
@@ -53,7 +50,17 @@ export async function getStaticProps({params}) {
 
     return {
         revalidate: config.page.news_author.revalidate,
-        props: {filters, pagination, tags, news, title: params.author}
+        props: {
+            filters, pagination,
+            tags,
+            news,
+            title: 'Le ultime notizie di ' + params.author,
+            image: '/images/home.jpg',
+            breadCrumbs: [
+                {url: "/news", label: "news"},
+                {url: null, label: title},
+            ]
+        }
     }
 }
 

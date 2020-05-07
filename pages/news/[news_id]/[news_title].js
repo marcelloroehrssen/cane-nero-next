@@ -3,7 +3,7 @@ import Base from "../../../src/components/layout/Base";
 import NewsBody from "../../../src/components/News/NewsBody";
 import remote from "../../../src/Utils/Remote";
 import {config} from "../../../src/Config";
-import { useRouter } from 'next/router'
+import {useRouter} from 'next/router'
 import Backdrop from "@material-ui/core/Backdrop";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
@@ -13,16 +13,13 @@ const NewsDetailPage = ({news, tags, related}) => {
     if (router.isFallback) {
         return (
             <Backdrop open={true}>
-                <CircularProgress color="inherit" />
+                <CircularProgress color="inherit"/>
             </Backdrop>
         );
     }
 
     return (
-        <Base title={news.title} image={'/images/home.jpg'} breadCrumbs={[
-            {url:"/news", label:"news"},
-            {url:null, label:news.title},
-        ]}>
+        <Base>
             <NewsBody news={news} tags={tags} related={related}/>
         </Base>
     );
@@ -35,7 +32,7 @@ export async function getStaticProps({params}) {
         }),
         maxresult: 1
     };
-    const {news} = await remote('/news', {get:newsGet});
+    const {news} = await remote('/news', {get: newsGet});
     const {tags} = await remote('/tag');
 
     const relatedNews = {
@@ -44,15 +41,21 @@ export async function getStaticProps({params}) {
         }),
         maxresult: 4
     };
-    const {news:related} = await remote('/news', {get:relatedNews});
+    const {news: related} = await remote('/news', {get: relatedNews});
 
     return {
         revalidate: config.page.news_news.revalidate,
         props: {
-            news_id:news[0].id,
-            news:news[0],
+            news_id: news[0].id,
+            news: news[0],
             tags,
-            related
+            related,
+            title: news[0].title,
+            image: '/images/home.jpg',
+            breadCrumbs: [
+                {url: "/news", label: "news"},
+                {url: null, label: news.title},
+            ]
         }
     }
 }

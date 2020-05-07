@@ -15,16 +15,13 @@ const Tag = ({filters, pagination, tags, news, title}) => {
     if (router.isFallback) {
         return (
             <Backdrop open={true}>
-                <CircularProgress color="inherit" />
+                <CircularProgress color="inherit"/>
             </Backdrop>
         );
     }
 
     return (
-        <Base title={'Le ultime notizie su ' + title} image={'/images/home.jpg'} breadCrumbs={[
-            {url:"/news", label:"news"},
-            {url:null, label:title},
-        ]}>
+        <Base>
             <Section title={'Le ultime notizie su ' + title}>
                 <NewsListPage filters={filters}
                               pagination={pagination}
@@ -55,7 +52,18 @@ export async function getStaticProps({params}) {
 
     return {
         revalidate: config.page.news_tags.revalidate,
-        props: {filters, pagination, tags, news, title: currentTag.label}
+        props: {
+            filters,
+            pagination,
+            tags,
+            news,
+            title: 'Le ultime notizie su ' + currentTag.label,
+            image: '/images/home.jpg',
+            breadCrumbs: [
+                {url: "/news", label: "news"},
+                {url: null, label: title},
+            ]
+        }
     }
 }
 

@@ -107,7 +107,7 @@ const Custom404 = () => {
     };
 
     return (
-        <Base title={'Pagina non trovata'} image={'/images/home.jpg'}>
+        <Base>
             <Section title={'Pagina non trovata'}>
                 <Typography>
                     La pagina che stavi cercando non è stata trovata, adesso hai due possibilità:
@@ -169,6 +169,10 @@ const Custom404 = () => {
             </Section>
         </Base>
     );
+}
+
+export async function getStaticProps() {
+    return {props:{title:'Pagina non trovata', image:'/images/home.jpg'}}
 }
 
 export default Custom404;

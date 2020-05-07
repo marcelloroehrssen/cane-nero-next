@@ -6,9 +6,7 @@ import remote from "../src/Utils/Remote";
 import {config} from "../src/Config";
 
 const Eventi = ({events, chronicles}) => (
-    <Base title={"Eventi di gioco di ruolo a Roma in programma"} image={'/images/home.jpg'} breadCrumbs={[
-        {url:null, label:"Eventi"}
-    ]}>
+    <Base>
         <Section title={"Eventi in programma"}>
             <Calendar events={events} chronicles={chronicles}/>
         </Section>
@@ -26,7 +24,15 @@ export async function getStaticProps({params}) {
 
     return {
         revalidate: config.page.eventi.revalidate,
-        props: {events, chronicles}
+        props: {
+            events,
+            chronicles,
+            title: "Eventi di gioco di ruolo a Roma in programma",
+            image: '/images/home.jpg',
+            breadCrumbs: [
+                {url: null, label: "Eventi"}
+            ]
+        }
     }
 }
 
