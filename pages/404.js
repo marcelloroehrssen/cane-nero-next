@@ -40,6 +40,15 @@ const GAME_STATE = {
 const Custom404 = () => {
 
     const cards = [
+        {image: "/images/andrea-ceravolo.jpg", name: 'andrea'},
+        {image: "/images/denis-cerini.jpg", name: 'denis'},
+        {image: "/images/francesco-foglietta.jpg", name: 'francesco'},
+        {image: "/images/francesco-tullio.jpg", name: 'francescoT'},
+        {image: "/images/gabriele-ricigliano.jpg", name: 'gabriele'},
+        {image: "/images/marco-rufini.jpg", name: 'marco'},
+        {image: "/images/massimo-orsini.jpg", name: 'massimo'},
+        {image: "/images/sara-pascolini.jpg", name: 'sara'},
+        {image: "/images/valerio-fabi.jpg", name: 'sara'},
         {image: "/images/paolo-leccese.jpg", name: 'paolo'},
         {image: "/images/viviana-de-simone.jpg", name: 'viviana'},
         {image: "/images/gabriele-cortina.jpg", name: 'gabriele'},

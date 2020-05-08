@@ -19,7 +19,7 @@ const Index = () => (
                 <Grid item xs={12} md={4}>
                     <StaffCard image="images/viviana-de-simone.jpg"
                                role={"Vice presidente"}
-                               title={"Narratore di houd"}
+                               title={"Narratore di hound backyard"}
                                name={"Viviana de Simone"}>
                         Narratore di houd, cronaca di vampire the masquerade, cronaca di roma
                     </StaffCard>
@@ -71,6 +71,78 @@ const Index = () => (
                                title={"Narratore di Notturna"}
                                name={"Jonathan Alfieri"}>
                         Narratore di Notturna, cronaca di vampire the masquerade, cronaca di roma
+                    </StaffCard>
+                </Grid>
+                <Grid item xs={12} md={4}>
+                    <StaffCard image="images/andrea-ceravolo.jpg"
+                               role={"Socio organizzatore"}
+                               title={"blah blah"}
+                               name={"Andrea Ceravolo"}>
+                        blah blah blah
+                    </StaffCard>
+                </Grid>
+                <Grid item xs={12} md={4}>
+                    <StaffCard image="images/denis-cerini.jpg"
+                               role={"Socio organizzatore"}
+                               title={"blah blah"}
+                               name={"Denis Cerini"}>
+                        blah blah blah
+                    </StaffCard>
+                </Grid>
+                <Grid item xs={12} md={4}>
+                    <StaffCard image="images/francesco-foglietta.jpg"
+                               role={"Socio organizzatore"}
+                               title={"blah blah"}
+                               name={"Francesco Foglietta"}>
+                        blah blah blah
+                    </StaffCard>
+                </Grid>
+                <Grid item xs={12} md={4}>
+                    <StaffCard image="images/francesco-tullio.jpg"
+                               role={"Socio organizzatore"}
+                               title={"blah blah"}
+                               name={"Francesco Tullio"}>
+                        blah blah blah
+                    </StaffCard>
+                </Grid>
+                <Grid item xs={12} md={4}>
+                    <StaffCard image="images/gabriele-ricigliano.jpg"
+                               role={"Tesoriere"}
+                               title={"Giocatore di Imperium Sanguinis"}
+                               name={"Gabriele Ricigliano"}>
+                        blah blah blah
+                    </StaffCard>
+                </Grid>
+                <Grid item xs={12} md={4}>
+                    <StaffCard image="images/marco-rufini.jpg"
+                               role={"Socio organizzatore"}
+                               title={"blah blah"}
+                               name={"Marco Rufini"}>
+                        blah blah blah
+                    </StaffCard>
+                </Grid>
+                <Grid item xs={12} md={4}>
+                    <StaffCard image="images/massimo-orsini.jpg"
+                               role={"Socio organizzatore"}
+                               title={"blah blah"}
+                               name={"Massimo Orsini"}>
+                        blah blah blah
+                    </StaffCard>
+                </Grid>
+                <Grid item xs={12} md={4}>
+                    <StaffCard image="images/sara-pascolini.jpg"
+                               role={"Socio organizzatore"}
+                               title={"blah blah"}
+                               name={"Sara Pascolini"}>
+                        blah blah blah
+                    </StaffCard>
+                </Grid>
+                <Grid item xs={12} md={4}>
+                    <StaffCard image="images/valerio-fabi.jpg"
+                               role={"Socio organizzatore"}
+                               title={"Narratore di Imperium sanguinis"}
+                               name={"Valerio Fabi"}>
+                        Narratore di Imperium Sanguinis, cronaca di vampire the requiem, cronaca di roma
                     </StaffCard>
                 </Grid>
             </Grid>

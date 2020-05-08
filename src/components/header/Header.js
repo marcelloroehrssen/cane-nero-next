@@ -31,7 +31,7 @@ export default function Header() {
             <AppBar position={'fixed'} id={id} style={styles}>
                 <Toolbar>
                     <LoggedIn edge="start"/>
-                    <NextLink href={"/"} passHref>
+                    <NextLink href={"/"} passHref scroll={false}>
                         <Link title={'Cane Nero - GDR lazio'}>
                             <img src={'/images/logo.jpg'} style={logoStyles} alt="Cane Nero - GDR lazio"/>
                         </Link>

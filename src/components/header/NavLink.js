@@ -52,7 +52,7 @@ export default function NavLink(props) {
                         return (
                             <Button className={"NavTopBarButton"} key={item.key} align={'center'}
                                     aria-controls={"menu-appbar"} style={{marginRight: theme.spacing(4)}}>
-                                <NextLink href={item.url} passHref>
+                                <NextLink href={item.url} passHref scroll={false}>
                                     <Link className={"NavTopBarLink"} variant="body2" color="inherit"
                                           underline={"none"}>{item.label}</Link>
                                 </NextLink>
